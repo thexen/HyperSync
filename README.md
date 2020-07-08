@@ -1,1 +1,3 @@
 # HyperSync
+
+[test]
