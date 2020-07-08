@@ -1,3 +1,3 @@
 # HyperSync
 
-![텍스트](http://cfile24.uf.tistory.com/image/2444873B57E257821FA2AE))
+![텍스트](https://user-images.githubusercontent.com/15353753/86919118-b1abbf00-c162-11ea-843c-c7f84a206dbd.png)
