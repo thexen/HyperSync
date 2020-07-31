@@ -1,0 +1,22 @@
+site_name: HyperCluster Sync for CDN 
+theme: readthedocs
+markdown_extensions:
+  - toc:
+    permalink: "#"
+    baselevel: 1
+    separator: "_"
+markdown_extensions:
+  - admonition
+pages:
+  - Intoduction: index.md
+  - Key Concepts: keyconc.md
+  - Glossary: glossary.md
+  - License: license.md
+  - Release notes: release-notes.md
+  - User guide:
+    - 'Configuration': 'guide/config.md'
+    - 'API':  'guide/how2use.md'
+  - Tutorials: 
+    - 'Replica Configuration': 'tutorials/replica.md'
+    - 'Synchronization': 'tutorials/sync.md'
+# 
