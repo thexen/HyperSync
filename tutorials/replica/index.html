@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Replica Configuration - HyperCluster Sync for CDN</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Replica Configuration";
+    var mkdocs_page_input_path = "tutorials/replica.md";
+    var mkdocs_page_url = "/tutorials/replica/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> HyperCluster Sync for CDN</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Intoduction</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../keyconc/">Key Concepts</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../glossary/">Glossary</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../license/">License</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../release-notes/">Release notes</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">User guide</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../guide/config/">Configuration</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../guide/how2use/">API</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Tutorials</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="./">Replica Configuration</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#replica">Replica</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#_1">환경변수 설정</a></li>
+        
+            <li><a class="toctree-l4" href="#_2">실 시간 동기화를 위한 환경 설정</a></li>
+        
+            <li><a class="toctree-l4" href="#peer_1">peer 실행하기</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../sync/">Synchronization</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">HyperCluster Sync for CDN</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Tutorials &raquo;</li>
+        
+      
+    
+    <li>Replica Configuration</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="replica">Replica</h1>
+<p>Replica 설정은 실 시간 동기화가 가능한 설정으로
+Windows <code>Single-Host</code>환경에서 4개의 <code>peer</code>로 Clustering 테스트가 가능하도록 설정하는 방법을 배워 보도록 하겠습니다.</p>
+<hr />
+<h2 id="_1">환경변수 설정</h2>
+<ul>
+<li><code>HYPERCLUSTER_PEER_PREFERENCE_FILE</code> = D:/project/workspace/http/server/config/preference.yaml</li>
+<li><code>HYPERCLUSTER_PEER_LOG_PREFERENCE_FILE</code> = D:/project/workspace/http/server/config/log.yaml</li>
+<li><code>HYPERCLUSTER_PEER_TLS_ENABLE</code> = DISABLE</li>
+<li><code>HYPERCLUSTER_PEER_HOSTNAME</code> 는 <code>peer</code>를 실행할 때 별도로 설정하여야 합니다</li>
+</ul>
+<p>리부팅 없이 환경변수를 적용하기 위해 아래 명령을 실행 합니다.</p>
+<pre><code>c:\&gt;set
+</code></pre>
+
+<hr />
+<h2 id="_2">실 시간 동기화를 위한 환경 설정</h2>
+<p>환경설정 파일은  환경변수 <code>HYPERCLUSTER_PEER_PREFERENCE_FILE</code> 으로 설정된 파일입니다</p>
+<pre><code>#####################################################
+#
+#   Hyper-Cluster Sync for CDN
+#
+#
+#
+#                       2020.08.01
+#                    DAESEOB.JEONG
+#
+#####################################################
+
+#####################################################      
+#Section: volumes
+#####################################################      
+volumes:
+  volume-name1: 
+    temporary: d:/data/peer1/temp
+    service: d:/data/peer1/cn-1
+  volume-name2: 
+    temporary: d:/data/peer2/temp
+    service: d:/data/peer2/cn-1
+  volume-name3: 
+    temporary: d:/data/peer3/temp
+    service: d:/data/peer3/cn-1        
+  volume-name4: 
+    temporary: d:/data/peer4/temp
+    service: d:/data/peer4/cn-1         
+
+#####################################################      
+#Section: peers  
+#####################################################      
+ peers:
+  hostname0:
+    addr: 127.0.0.1:8080
+    volumes: 
+      repo-name1: volume-name1
+      repo-name2:
+        temporary: d:/data/peer1/temp
+        service: d:/data/peer1/cn-2 
+  hostname1:
+    addr: 127.0.0.1:8081
+    volumes: 
+      repo-name1: volume-name2
+      repo-name2: 
+        temporary: d:/data/peer2/temp
+        service: d:/data/peer2/cn-2
+  hostname2:
+    addr: 127.0.0.1:8082
+    volumes: 
+      repo-name1: volume-name3
+  hostname3:
+    addr: 127.0.0.1:8083
+    volumes: 
+      repo-name1: volume-name4
+
+#####################################################      
+#Section: user
+#####################################################      
+users:
+  admin:
+    pwd: admin
+  user1:
+    pwd: user1                      
+
+#####################################################      
+#Section: cluster          
+#####################################################      
+cluster: 
+  replica-name1:
+    role: replica
+    #elasticsearch-url: http://192.168.249.102:9200/hypersync/_doc #ACCESS Logging
+    peers:
+      hostname0: 
+        volume: repo-name1
+      hostname1: 
+        volume: repo-name1
+      hostname2: 
+        volume: repo-name1
+      hostname3: 
+        volume: repo-name1
+    users:
+      admin:
+        grant: rwds
+      user1:
+        grant: r
+      anonymous:
+        grant: r
+</code></pre>
+
+<h3 id="volume">volume 설정 방법</h3>
+<ul>
+<li>4개의 <code>peer</code>에서 각각 다른 <code>volume</code>을 사용하도록 <code>volumes</code> 섹션에서 4개의 <code>named-volume</code>을 생성하고 <code>mount</code>합니다.<ul>
+<li><code>mount</code> 된 <code>named-volume</code>은 <code>volume-name1</code>, <code>volume-name2</code>, <code>volume-name3</code>, <code>volume-name4</code> 입니다.</li>
+</ul>
+</li>
+</ul>
+<pre><code>#####################################################      
+#Section: volumes
+#####################################################      
+volumes:
+  volume-name1: 
+    temporary: d:/data/peer1/temp
+    service: d:/data/peer1/cn-1
+  volume-name2: 
+    temporary: d:/data/peer2/temp
+    service: d:/data/peer2/cn-1
+  volume-name3: 
+    temporary: d:/data/peer3/temp
+    service: d:/data/peer3/cn-1        
+  volume-name4: 
+    temporary: d:/data/peer4/temp
+    service: d:/data/peer4/cn-1         
+</code></pre>
+
+<h3 id="peer">peer 설정 방법</h3>
+<ul>
+<li><code>peers</code>섹션에 4개의 <code>peer</code> <code>hostname0</code>, <code>hostname1</code>, <code>hostname2</code>, <code>hostname3</code> 을 생성합니다.</li>
+<li><code>peer</code>와 <code>peer</code>간 통신 과 <code>user</code>가 접속이 가능한 <code>IP:Port</code> 를 각 <code>peers.{hostname}.addr</code>에 설정합니다.</li>
+<li>그리고 마지막으로 <code>peer</code>에서 사용 할  <code>volume</code>을  <code>peers.{hostname}.volumes.{named-volume}</code>에 설정합니다<ul>
+<li><code>peers.{hostname}.volumes</code>에 <code>named-volume</code>를 등록합니다.<ul>
+<li><code>peers.hostname0.volumes.repo-name1</code> 에 <code>volumes</code>섹션에서 <code>mount</code>한 <code>volume-name1</code>을 사용하도록 설정.</li>
+<li><code>peers.hostname1.volumes.repo-name1</code> 에 <code>volumes</code>섹션에서 <code>mount</code>한 <code>volume-name2</code>을 사용하도록 설정.</li>
+<li><code>peers.hostname2.volumes.repo-name1</code> 에 <code>volumes</code>섹션에서 <code>mount</code>한 <code>volume-name3</code>을 사용하도록 설정.</li>
+<li><code>peers.hostname3.volumes.repo-name1</code> 에 <code>volumes</code>섹션에서 <code>mount</code>한 <code>volume-name4</code>을 사용하도록 설정.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code> peers:
+  hostname0:
+    addr: 127.0.0.1:8080
+    volumes: 
+      repo-name1: volume-name1
+      repo-name2:
+        temporary: d:/data/peer1/temp
+        service: d:/data/peer1/cn-2 
+  hostname1:
+    addr: 127.0.0.1:8081
+    volumes: 
+      repo-name1: volume-name2
+      repo-name2: 
+        temporary: d:/data/peer2/temp
+        service: d:/data/peer2/cn-2
+  hostname2:
+    addr: 127.0.0.1:8082
+    volumes: 
+      repo-name1: volume-name3
+  hostname3:
+    addr: 127.0.0.1:8083
+    volumes: 
+      repo-name1: volume-name4
+</code></pre>
+
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>peer</code>의 <code>volume</code> 은 여러개 등록 가능합니다.</p>
+</div>
+<h3 id="cluster">cluster 설정 방법</h3>
+<p><code>cluster</code>섹션은 여러 개의 <code>named-cluster</code>등록이 가능하지만 이번 <code>tutorials</code>에서는 <code>replica</code>역할이 가능한 <code>cluster</code>하나만 등록하도록 하겠습니다.</p>
+<ul>
+<li><code>cluster</code>섹션에 <code>replica-name1</code>이라는 <code>named-cluster</code>를 등록 합니다.</li>
+<li><code>cluster.replica-name1.role</code>에 <code>replica</code>로 설정하여  <code>replica-name1</code>은 <code>실 시간 동기화</code>가 가능하도록 설정합니다.</li>
+<li><code>replica-name1</code>에 참여할 <code>peer</code>를 <code>peers</code>센션에서 정의한 <code>peer</code>들 중에서 선택하여  <code>cluster.replica-name1.peers</code>에 등록 합니다.</li>
+<li>다음은 <code>peer</code>들이 사용할 <code>volume</code>을 선택합니다.<ul>
+<li><code>cluster.replica-name1.peers.hostname0.volume</code>에 <code>peers.hostname0.volumes</code>에서 등록한 <code>named-volume</code> <code>repo-name1</code>를 설정.</li>
+<li><code>cluster.replica-name1.peers.hostname1.volume</code>에 <code>peers.hostname1.volumes</code>에서 등록한 <code>named-volume</code> <code>repo-name1</code>를 설정.</li>
+<li><code>cluster.replica-name1.peers.hostname2.volume</code>에 <code>peers.hostname1.volumes</code>에서 등록한 <code>named-volume</code> <code>repo-name1</code>를 설정.</li>
+<li><code>cluster.replica-name1.peers.hostname3.volume</code>에 <code>peers.hostname1.volumes</code>에서 등록한 <code>named-volume</code> <code>repo-name1</code>를 설정.</li>
+</ul>
+</li>
+<li>끝으로 <code>replica-name1</code>을 사용할 <code>user</code> 와 <code>grant</code>를 등록 합니다.<ul>
+<li>등록가능한 <code>user</code>는 <code>users</code>섹션에 등록이 되어 있어야 합니다.</li>
+</ul>
+</li>
+</ul>
+<pre><code>cluster: 
+  replica-name1:
+    role: replica
+    #elasticsearch-url: http://192.168.249.102:9200/hypersync/_doc #ACCESS Logging
+    peers:
+      hostname0: 
+        volume: repo-name1
+      hostname1: 
+        volume: repo-name1
+      hostname2: 
+        volume: repo-name1
+      hostname3: 
+        volume: repo-name1
+    users:
+      admin:
+        grant: rwds
+      user1:
+        grant: r
+      anonymous:
+        grant: r
+</code></pre>
+
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>cluster.replica-name1.elasticsearch-url</code>은 <code>access log</code>가 저장 될 <code>ElasticSearch</code>의 URL 정보입니다.</p>
+</div>
+<hr />
+<h2 id="peer_1">peer 실행하기</h2>
+<h3 id="peershostname0"><code>peers.hostname0</code> 실행하기</h3>
+<ul>
+<li>환경 변수 <code>HYPERCLUSTER_PEER_HOSTNAME</code>를 <code>hostname0</code>으로 설정합니다.</li>
+<li>설치한 경로로 이동하여 <code>hypercluster</code>를 실행 합니다.</li>
+</ul>
+<pre><code>c:&gt;hypercluster
+</code></pre>
+
+<h3 id="peershostname1"><code>peers.hostname1</code> 실행하기</h3>
+<ul>
+<li>환경 변수 <code>HYPERCLUSTER_PEER_HOSTNAME</code>를 <code>hostname1</code>으로 설정합니다.</li>
+<li>설치한 경로로 이동하여 <code>hypercluster</code>를 실행 합니다.</li>
+</ul>
+<pre><code>c:&gt;hypercluster
+</code></pre>
+
+<h3 id="peershostname2"><code>peers.hostname2</code> 실행하기</h3>
+<ul>
+<li>환경 변수 <code>HYPERCLUSTER_PEER_HOSTNAME</code>를 <code>hostname2</code>으로 설정합니다.</li>
+<li>설치한 경로로 이동하여 <code>hypercluster</code>를 실행 합니다.</li>
+</ul>
+<pre><code>c:&gt;hypercluster
+</code></pre>
+
+<h3 id="peershostname3"><code>peers.hostname3</code> 실행하기</h3>
+<ul>
+<li>환경 변수 <code>HYPERCLUSTER_PEER_HOSTNAME</code>를 <code>hostname3</code>으로 설정합니다.</li>
+<li>설치한 경로로 이동하여 <code>hypercluster</code>를 실행 합니다.</li>
+</ul>
+<pre><code>c:&gt;hypercluster
+</code></pre>
+
+<ul>
+<li><a href="../sync/">Synchronization cluster 구성하기</a></li>
+</ul>
+<p><img alt="대체 텍스트" src="../../images/github.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../sync/" class="btn btn-neutral float-right" title="Synchronization">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../guide/how2use/" class="btn btn-neutral" title="API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../guide/how2use/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../sync/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/require.js"></script>
+      <script src="../../search/search.js"></script>
+
+</body>
+</html>
