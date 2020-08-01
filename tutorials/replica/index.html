@@ -7,24 +7,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
+  
   <link rel="shortcut icon" href="../../img/favicon.ico">
   <title>Replica Configuration - HyperCluster Sync for CDN</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/highlight.css">
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
   
   <script>
     // Current page data
     var mkdocs_page_name = "Replica Configuration";
-    var mkdocs_page_input_path = "tutorials/replica.md";
-    var mkdocs_page_url = "/tutorials/replica/";
+    var mkdocs_page_input_path = "tutorials\\replica.md";
+    var mkdocs_page_url = null;
   </script>
   
-  <script src="../../js/jquery-2.1.1.min.js"></script>
-  <script src="../../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
 
@@ -34,93 +36,79 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
         <a href="../.." class="icon icon-home"> HyperCluster Sync for CDN</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../..">Intoduction</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../keyconc/">Key Concepts</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../glossary/">Glossary</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../license/">License</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../release-notes/">Release notes</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">User guide</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../guide/config/">Configuration</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../guide/how2use/">API</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Tutorials</span>
-    <ul class="subnav">
-                <li class=" current">
-                    
-    <a class="current" href="./">Replica Configuration</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#replica">Replica</a></li>
-    
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Intoduction</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../keyconc/">Key Concepts</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../glossary/">Glossary</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../license/">License</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../release-notes/">Release notes</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../guide/config/">Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../guide/how2use/">API</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Tutorials</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Replica Configuration</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_1">환경변수 설정</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">실 시간 동기화를 위한 환경 설정</a>
         <ul>
-        
-            <li><a class="toctree-l4" href="#_1">환경변수 설정</a></li>
-        
-            <li><a class="toctree-l4" href="#_2">실 시간 동기화를 위한 환경 설정</a></li>
-        
-            <li><a class="toctree-l4" href="#peer_1">peer 실행하기</a></li>
-        
+    <li class="toctree-l3"><a class="reference internal" href="#volume">volume 설정 방법</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#peer">peer 설정 방법</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cluster">cluster 설정 방법</a>
+    </li>
         </ul>
-    
-
-    </ul>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../sync/">Synchronization</a>
-                </li>
-    </ul>
-	    </li>
-          
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#peer_1">peer 실행하기</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#peershostname0">peers.hostname0 실행하기</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#peershostname1">peers.hostname1 실행하기</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#peershostname2">peers.hostname2 실행하기</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#peershostname3">peers.hostname3 실행하기</a>
+    </li>
         </ul>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../sync/">Synchronization</a>
+                    </li>
+                </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -149,6 +137,7 @@
       
     </li>
   </ul>
+  
   <hr/>
 </div>
           <div role="main">
@@ -434,7 +423,7 @@ volumes:
     
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
@@ -444,7 +433,7 @@ volumes:
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
@@ -456,9 +445,13 @@ volumes:
     </span>
 </div>
     <script>var base_url = '../..';</script>
-    <script src="../../js/theme.js"></script>
-      <script src="../../search/require.js"></script>
-      <script src="../../search/search.js"></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>
