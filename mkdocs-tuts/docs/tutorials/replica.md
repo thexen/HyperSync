@@ -244,5 +244,7 @@ c:>hypercluster
 
 * [Synchronization cluster 구성하기](sync.md)
 
+
+
 ![대체 텍스트](../images/github.png)
 
