@@ -5,26 +5,26 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="None">
   
   
-  <link rel="shortcut icon" href="img/favicon.ico">
-  <title>HyperCluster</title>
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Configurations - HyperCluster</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="css/theme.css" />
-  <link rel="stylesheet" href="css/theme_extra.css" />
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Welcome to MkDocs";
-    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_name = "Configurations";
+    var mkdocs_page_input_path = "guides\\logging-config.md";
     var mkdocs_page_url = null;
   </script>
   
-  <script src="js/jquery-2.1.1.min.js" defer></script>
-  <script src="js/modernizr-2.8.3.min.js" defer></script>
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
@@ -38,9 +38,9 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="." class="icon icon-home"> HyperCluster</a>
+        <a href="../.." class="icon icon-home"> HyperCluster</a>
         <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
@@ -48,7 +48,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
                 <ul>
-                    <li class="toctree-l1"><a class="" href="intro.md">Intoduction</a>
+                    <li class="toctree-l1"><a class="" href="../../intro.md">Intoduction</a>
                     </li>
                 </ul>
       </div>
@@ -60,7 +60,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href=".">HyperCluster</a>
+        <a href="../..">HyperCluster</a>
       </nav>
 
       
@@ -68,11 +68,11 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".">Docs</a> &raquo;</li>
+    <li><a href="../..">Docs</a> &raquo;</li>
     
       
     
-    <li>Welcome to MkDocs</li>
+    <li>Configurations</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -83,21 +83,41 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
+                <h1 id="configurations">Configurations</h1>
+<p><strong><em> 로깅 환경 설정 안내서</em></strong></p>
+<hr />
+<h2 id="_1">로그 설정</h2>
+<p>두 종류의 로그를 저장 합니다.</p>
 <ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
+<li>trace</li>
+<li>access</li>
 </ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+<p><code>trace</code>로그는 <strong>painc</strong>, <strong>error</strong> 등 <strong>debug</strong> 정보나 <strong>issue</strong> 처리를 위한 로그 입니다.</p>
+<p><code>access</code>로그는 <code>clustering</code> 작업 처리 결과를 저장하는 로그이며 <strong>ElasticSearch</strong>와 직접 연계가 가능하도록 <strong>JSON</strong> 형태로 저장됩니다.</p>
+<pre><code>logs:
+  trace:
+    path:
+    debug: true
+    level: 99
+    rotacnt: 30
+    rotafreq: 86400
+  access:
+    path:
+    debug: false
+    level: 0
+    rotacnt: 30
+    rotafreq: 86400
 </code></pre>
+<ul>
+<li><code>path</code> - 로그가 저장될 경로</li>
+<li><code>debug</code> - 소스 위치 출력</li>
+<li><code>level</code> - 저장할 로그의 범위 정의</li>
+<li><code>rotacnt</code> - 로그 로테이션 갯수</li>
+<li><code>rotafreq</code> - 로그 로테이션 주기(sec)</li>
+</ul>
+<div class="admonition tip">
+<p>HyperCluster의 로그는 rotation 기능이 있습니다.</p>
+</div>
               
             </div>
           </div>
@@ -128,9 +148,9 @@ docs/
       
     </span>
 </div>
-    <script>var base_url = '.';</script>
-    <script src="js/theme.js" defer></script>
-      <script src="search/main.js" defer></script>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
     <script defer>
         window.onload = function () {
             SphinxRtdTheme.Navigation.enable(true);
@@ -139,8 +159,3 @@ docs/
 
 </body>
 </html>
-
-<!--
-MkDocs version : 1.1.2
-Build Date UTC : 2020-08-02 08:08:01.464888+00:00
--->
