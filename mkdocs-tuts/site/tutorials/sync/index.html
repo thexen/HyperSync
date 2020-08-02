@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Synchronization - HyperCluster Sync for CDN</title>
+  <title>준비중... - HyperCluster</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Synchronization";
+    var mkdocs_page_name = "\uc900\ube44\uc911...";
     var mkdocs_page_input_path = "tutorials\\sync.md";
     var mkdocs_page_url = null;
   </script>
@@ -38,7 +38,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> HyperCluster Sync for CDN</a>
+        <a href="../.." class="icon icon-home"> HyperCluster</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
@@ -48,7 +48,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../..">Intoduction</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../intro/">Intoduction</a>
                     </li>
                 </ul>
                 <ul>
@@ -56,7 +56,19 @@
                     </li>
                 </ul>
                 <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../guides/">User Guides</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../guides/api-v0.6.x.x/">API</a>
+                    </li>
+                </ul>
+                <ul>
                     <li class="toctree-l1"><a class="reference internal" href="../../glossary/">Glossary</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../release-notes/">Release notes</a>
                     </li>
                 </ul>
                 <ul>
@@ -64,29 +76,7 @@
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../release-notes/">Release notes</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">User guide</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../guide/config/">Configuration</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../guide/how2use/">API</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Tutorials</span></p>
-                <ul class="current">
-                    <li class="toctree-l1"><a class="reference internal" href="../replica/">Replica Configuration</a>
-                    </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Synchronization</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#_1">환경 변수</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_2">클러스터 설정</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_3">로그 설정</a>
-    </li>
-    </ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../">Tutorials</a>
                     </li>
                 </ul>
       </div>
@@ -98,7 +88,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">HyperCluster Sync for CDN</a>
+        <a href="../..">HyperCluster</a>
       </nav>
 
       
@@ -109,12 +99,8 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
-        
-          <li>Tutorials &raquo;</li>
-        
-      
     
-    <li>Synchronization</li>
+    <li>준비중...</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -125,151 +111,12 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="configurations">Configurations</h1>
-<h2 id="_1">환경 변수</h2>
-<ul>
-<li><code>HYPERCLUSTER_PEER_PREFERENCE_FILE</code> - 클러스터 설정 파일.(default: <code>./config/preference.yaml</code>)</li>
-<li><code>HYPERCLUSTER_PEER_LOG_PREFERENCE_FILE</code> - 로그 설정 파일.(default: <code>./config/log.yaml</code>)</li>
-<li><code>HYPERCLUSTER_PEER_TLS_ENABLE</code> - TLS 사용 여부.(default: <code>DISABLE</code>)</li>
-<li><code>HYPERCLUSTER_PEER_TLS_CERT</code> - <code>crt</code> 파일.(default: <code>./cert/public.crt</code>)</li>
-<li><code>HYPERCLUSTER_PEER_TLS_KEY</code> - <code>key</code> 파일.(default: <code>./cert/private.key</code>)</li>
-<li><code>HYPERCLUSTER_PEER_ADVERTISE_URL</code> - cluster peer 관리 서버 URL.( <code>미지원상태</code>)</li>
-</ul>
-<h2 id="_2">클러스터 설정</h2>
-<p><code>preference.yaml</code>파일에는 4개의 섹션이 있습니다.</p>
-<ul>
-<li>volumes</li>
-<li>peers</li>
-<li>users</li>
-<li>cluster</li>
-</ul>
-<p><code>volumes</code>섹션은 peer가 사용 할 volume을 준비 할 수 있습니다.
-<code>service</code>경로와 <code>temporary</code>경로를 설정하여야 하며 peer는 <code>upload</code>와<code>sync</code> 명령을 수신하면 파일을 저장하는데 <code>service</code>중인 파일이 오염되지 않도록 <code>temporary</code>경로를 이용하여 저장한 후 <code>service</code>경로로 파일을 이동 시켜 <code>service</code>중인 파일의 무결성을 보장 합니다.</p>
-<p><code>peers</code>는 <code>hostname</code>, <code>peer address:port</code>, <code>volumes</code>를 설정하여 <code>cluster</code>에 참여 가능하도록 합니다.</p>
-<p><code>user</code> 섹션은 cluster를 사용 할 <code>user</code>를 정의 하며
-<code>cluster</code> 세션은 <code>cluster name</code>으로 <code>cluster</code>를 여러 <code>group</code>으로 구성 할 수 있고 <code>group</code>마다 <code>role</code>을 정의하여 각기 다른 역할을 가진 <code>cluster</code> 구성이 가능합니다.
-<code>cluster name</code>에 참여할 <code>peer</code>와 <code>user</code> 그리고 <code>access log</code>를 저장할 <code>ElasticSearch URL</code> 정보를 등록 하면 설정이 마무리 됩니다.
-<code>cluster</code>의 <code>role</code>은 <code>restapi</code>, <code>replica</code>, <code>advertisement</code> 가 있으며 현재 <code>replica</code> 만 지원 합니다.</p>
-<p><code>preference.yaml</code> 파일의 구조를 보시겠습니다.</p>
-<pre><code>#Section: volumes
-volumes:
-  volume-name1: 
-    temporary: 
-    service:
-
-#Section: peers    
-peers:
-  hostname1:
-    addr: 
-    volumes: 
-      repo-name1: volume-name1
-      repo-name2:
-        temporary: 
-        service:
-
-#Section: user
-users:
-  admin:
-    pwd: admin
-  user1:
-    pwd: user1
-
-#Section: cluster          
-cluster: 
-  restapi:
-    role: restapi
-    elasticsearch: 
-    api:
-      - status
-    peers:
-      - hostname1
-    users:
-      - admin
-  replica-name1:
-    role: replica
-    elasticsearch-url: 
-    peers:
-      hostname1: 
-        volume: repo-name1
-    users:
-      admin:
-        grant: rwds
-      user1:
-        grant: r
-      anonymous:
-        grant: r
-   replica-name2:
-     role: advertisement
-     elasticsearch:
-     peers:
-     users:
-</code></pre>
-<p><code>volumes</code>섹션에서 <code>volume-name1</code>을 정의 하였고 <code>peers</code>섹션의 <code>hostname1.volumes</code>에서 정의한 <code>repo-name1</code>에서 사용합니다.
-<code>peer</code>의 <code>volumes</code>는 <code>volumes</code>섹션에서 정의 하지 않아도 자체 정의하여 사용이 가능합니다.
- <code>peers</code>섹션의 <code>hostname1</code>는 Winodws에서는 컴퓨터 이름, Linux에서는 Host Name과 동일 하여야 합니다.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p><code>peers</code>섹션의
-<code>hostname1</code>는 Winodws에서는 컴퓨터 이름, Linux에서는 Host Name과 동일 하여야 하며 <code>addr</code>은 <code>peer</code>들 간 통신이 가능한 <code>ip:port</code>로 설정 되어야 합니다.</p>
-</div>
-<p><code>cluster</code>섹션에서 정의한 <code>replica-name1</code>의 설정을 보면
-<code>replica</code>역할을 하는 <code>cluster</code>로써 <strong><em>실시간 동기화</em></strong>를 가능하게 합니다.</p>
-<p><code>replica-name1</code>에 <code>join</code>한 <code>peer</code>는 <code>hostname1</code>이며
-<code>hostname1</code>이 사용할 <code>volume</code>은 <code>hostname1</code>에서 정의한 <code>volume</code>들 중 <code>repo-name1</code>입니다</p>
-<p><code>replica-name1</code>에 접근 가능한 사용자는 <code>users</code>에 정의된 admin와 user1 이고 익명 사용자인 <code>anonymous</code>도 접근이 가능하게 설정 하였습니다.
-admin의 권한인 <code>grant</code>가 <code>rwds</code> 이므로 모든 권한을 가지고 있고 나머지 user1과 <code>anonymous</code>는  <code>grant</code>가 <code>r</code>인 읽기 권한만 가집니다</p>
-<div class="admonition note">
-<p class="admonition-title">참고</p>
-<p><code>grant</code>는 <code>r</code>: 읽기 권한, <code>w</code>: 쓰기 권한, <code>d</code>: 삭제 권한, <code>s</code>: 수동 동기 권한 이 있습니다.</p>
-</div>
-<div class="admonition danger">
-<p class="admonition-title">Danger</p>
-<p><code>users</code>에 <code>anonymous</code>을 추가 하면 익명사용자 이므로 인증을 하지 않으니 주의 하여야 합니다.</p>
-</div>
-<h2 id="_3">로그 설정</h2>
-<p>두종류의 로그를 저장 합니다.</p>
-<ul>
-<li>trace</li>
-<li>access</li>
-</ul>
-<p><code>trace</code>로그는 painc, error 등 debug 정보나 issue 처리를 위한 로그 입니다.</p>
-<p><code>access</code>로그는 <code>clustering</code> 작업 처리 결과를 저장하는 로그이며 <code>ElasticSearch</code>와 직접 연계가 가능하도록 json 형태로 저장됩니다.</p>
-<pre><code>logs:
-  trace:
-    path:
-    debug: true
-    level: 99
-    rotacnt: 30
-    rotafreq: 86400
-  access:
-    path:
-    debug: false
-    level: 0
-    rotacnt: 30
-    rotafreq: 86400
-</code></pre>
-<ul>
-<li><code>path</code> - 로그가 저장될 경로</li>
-<li><code>debug</code> - 소스 위치 출력</li>
-<li><code>level</code> - 저장할 로그의 범위 정의</li>
-<li><code>rotacnt</code> - 로그 로테이션 갯수</li>
-<li><code>rotafreq</code> - 로그 로테이션 주기(sec)</li>
-</ul>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>HyperCluster의 로그는 자체 rotation 기능을 제공합니다.</p>
-</div>
+                <h1 id="_1">준비중...</h1>
+<p><img alt="대체 텍스트" src="../../images/github.png" /></p>
               
             </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-      
-        <a href="../replica/" class="btn btn-neutral" title="Replica Configuration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
@@ -292,8 +139,6 @@ admin의 권한인 <code>grant</code>가 <code>rwds</code> 이므로 모든 권�
   <div class="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-      
-        <span><a href="../replica/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
     </span>

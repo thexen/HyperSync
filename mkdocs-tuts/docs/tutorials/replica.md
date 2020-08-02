@@ -1,7 +1,8 @@
 # Replica
 
 Replica 설정은 실 시간 동기화가 가능한 설정으로
-Windows `Single-Host`환경에서 4개의 `peer`로 Clustering 테스트가 가능하도록 설정하는 방법을 배워 보도록 하겠습니다.
+Windows **Single-Host** 환경에서 4개의 `peer`로 Clustering이 가능하도록 구성하겠습니다.
+
 -------------
 
 ## 환경변수 설정
@@ -15,7 +16,7 @@ Windows `Single-Host`환경에서 4개의 `peer`로 Clustering 테스트가 가�
 ```
 c:\>set
 ```
--------------
+-----
 
 ## 실 시간 동기화를 위한 환경 설정
 
@@ -109,9 +110,12 @@ cluster:
       anonymous:
         grant: r
 ```
-### volume 설정 방법
-* 4개의 `peer`에서 각각 다른 `volume`을 사용하도록 `volumes` 섹션에서 4개의 `named-volume`을 생성하고 `mount`합니다.
-	* `mount` 된 `named-volume`은 `volume-name1`, `volume-name2`, `volume-name3`, `volume-name4` 입니다.
+
+-----
+
+### volume 설정
+* 4개의 `peer`에서 각각 다른 `volume`을 사용하도록 `volumes`섹션에서 4개의 `named-volume`을 생성하고 `mount`합니다.
+	* `mount` 된 `named-volume`은 **volume-name1**, **volume-name2**, **volume-name3**, **volume-name4** 입니다.
 ```
 #####################################################      
 #Section: volumes
@@ -131,16 +135,20 @@ volumes:
     service: d:/data/peer4/cn-1         
 ```
 
-### peer 설정 방법
-* `peers`섹션에 4개의 `peer` `hostname0`, `hostname1`, `hostname2`, `hostname3` 을 생성합니다.
-* `peer`와 `peer`간 통신 과 `user`가 접속이 가능한 `IP:Port` 를 각 `peers.{hostname}.addr`에 설정합니다.
-* 그리고 마지막으로 `peer`에서 사용 할  `volume`을  `peers.{hostname}.volumes.{named-volume}`에 설정합니다
-	* `peers.{hostname}.volumes`에 `named-volume`를 등록합니다.
-		* `peers.hostname0.volumes.repo-name1` 에 `volumes`섹션에서 `mount`한 `volume-name1`을 사용하도록 설정.
-		* `peers.hostname1.volumes.repo-name1` 에 `volumes`섹션에서 `mount`한 `volume-name2`을 사용하도록 설정.
-		* `peers.hostname2.volumes.repo-name1` 에 `volumes`섹션에서 `mount`한 `volume-name3`을 사용하도록 설정.
-		* `peers.hostname3.volumes.repo-name1` 에 `volumes`섹션에서 `mount`한 `volume-name4`을 사용하도록 설정.
+-----
 
+### peer 설정 방법
+* `peers`섹션에 4개의 `peer` **hostname0**, **hostname1**, **hostname2**, **hostname3** 를 준비합니다.
+* `peer`와 `peer`간 통신 과 `user(사용자)`가 접속이 가능한 `IP:Port` 를 각 `peers.{hostname}.addr`에 설정합니다.
+
+!!! tip "참고"
+    ***{hostname}***는 `peers`섹션에서 준비한 `peer` 이름입니다. 
+
+* 그리고 마지막으로 `peer`에서 사용 할  `volume`을  `peers.{hostname}.volumes.{named-volume}`에 설정합니다
+	
+    1. `peers.{hostname}.volumes`에 `named-volume`를 등록합니다.
+    2. `volumes`섹션에서 `mount`한 `named-volume`을 `peers.{hostname}.volumes.{named-volume}`와 연결합니다.
+		
 ```
  peers:
   hostname0:
@@ -167,21 +175,34 @@ volumes:
       repo-name1: volume-name4
 ```
 
-!!! tip
+!!! tip "참고"
     `peer`의 `volume` 은 여러개 등록 가능합니다.
 
-### cluster 설정 방법
-`cluster`섹션은 여러 개의 `named-cluster`등록이 가능하지만 이번 `tutorials`에서는 `replica`역할이 가능한 `cluster`하나만 등록하도록 하겠습니다.
+-----
 
-* `cluster`섹션에 `replica-name1`이라는 `named-cluster`를 등록 합니다.
-*  `cluster.replica-name1.role`에 `replica`로 설정하여  `replica-name1`은 `실 시간 동기화`가 가능하도록 설정합니다.
-*  `replica-name1`에 참여할 `peer`를 `peers`센션에서 정의한 `peer`들 중에서 선택하여  `cluster.replica-name1.peers`에 등록 합니다.
-* 다음은 `peer`들이 사용할 `volume`을 선택합니다.
-	* `cluster.replica-name1.peers.hostname0.volume`에 `peers.hostname0.volumes`에서 등록한 `named-volume` `repo-name1`를 설정.
-	* `cluster.replica-name1.peers.hostname1.volume`에 `peers.hostname1.volumes`에서 등록한 `named-volume` `repo-name1`를 설정.
-	* `cluster.replica-name1.peers.hostname2.volume`에 `peers.hostname1.volumes`에서 등록한 `named-volume` `repo-name1`를 설정.
-	* `cluster.replica-name1.peers.hostname3.volume`에 `peers.hostname1.volumes`에서 등록한 `named-volume` `repo-name1`를 설정.
-* 끝으로 `replica-name1`을 사용할 `user` 와 `grant`를 등록 합니다.
+### cluster 설정
+`cluster`섹션은 여러 개의 `named-cluster`등록이 가능하지만 본 ***Tutorials***에서는 **replica**역할이 가능한 `cluster`하나만 등록하도록 하겠습니다.
+
+* `cluster`섹션에 **replica-name1**이라는 `named-cluster`를 등록 합니다.
+* `cluster.replica-name1.role`에 **replica**로 설정하여  **replica-name1**은 `실 시간 동기화`가 가능하도록 설정합니다.
+
+*  **replica-name1**에 참여 할 `peer`를 `peers`센션에서 준비한 `peer`를 선택하여  `cluster.{named-cluster}.peers`에 등록 합니다.
+
+!!! tip "참고"
+    `cluster`에 등록한 `named-cluster`는 **replica-name1** 입니다.    
+    다시 말 하면 `{named-cluster}`부분을 **replica-name1**으로 변경하면 됩니다.
+
+* 다음은 `cluster`에 참여한 `peer`들이 사용 할 `volume`을 선택합니다.
+  `cluster.{named-cluster}.peers.{hostname}.volume`에 `peers.{hostname}.volumes`에서 `mount`한
+  `named-volume`을 사용하도록 등록합니다.
+
+    * `cluster.replica-name1.peers.hostname0.volume`는 `peers.hostname0.volumes`에서 등록한 `named-volume` `repo-name1`를 연결합니다.
+    * `cluster.replica-name1.peers.hostname1.volume`는 `peers.hostname1.volumes`에서 등록한 `named-volume` `repo-name1`를 연결합니다.
+    * `cluster.replica-name1.peers.hostname2.volume`는 `peers.hostname1.volumes`에서 등록한 `named-volume` `repo-name1`를 연결합니다.
+    * `cluster.replica-name1.peers.hostname3.volume`는 `peers.hostname1.volumes`에서 등록한 `named-volume` `repo-name1`를 연결합니다.
+
+
+* 끝으로 **replica-name1**을 사용할 `user` 와 `grant`를 등록 설정합니다.
 	* 등록가능한 `user`는 `users`섹션에 등록이 되어 있어야 합니다.
 
 ```
@@ -240,11 +261,3 @@ c:>hypercluster
 ```
 c:>hypercluster
 ```
-
-
-* [Synchronization cluster 구성하기](sync.md)
-
-
-
-![대체 텍스트](../images/github.png)
-

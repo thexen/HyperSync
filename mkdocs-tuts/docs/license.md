@@ -1,16 +1,14 @@
-# Key Concepts
+# License
 
-!!! note "제목"
-    "note" 라는 키워드를 이용하여 서식을 사용할 수 있습니다.  
-    "note" 라는 키워드를 이용하여 서식을 사용할 수 있습니다.  
-    "note" 라는 키워드를 이용하여 서식을 사용할 수 있습니다.
+***GNU General Public License 3.0***
 
-!!! tip
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
-    nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
-    massa, nec semper lorem quam in massa.
+## 예외사항
 
-!!! warning
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
-    nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
-    massa, nec semper lorem quam in massa.
+* 아래 사용자는 저작권자의 동의없이 무단 배포와 사용을 금합니다.
+
+
+    !!! danger ""    
+        효성ITX    
+
+    
+
