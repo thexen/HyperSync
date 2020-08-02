@@ -5,26 +5,26 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="None">
   
   
-  <link rel="shortcut icon" href="img/favicon.ico">
-  <title>HyperCluster</title>
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>HyperCluster - HyperCluster</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="css/theme.css" />
-  <link rel="stylesheet" href="css/theme_extra.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Intorducion";
-    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_name = "HyperCluster";
+    var mkdocs_page_input_path = "release-notes.md";
     var mkdocs_page_url = null;
   </script>
   
-  <script src="js/jquery-2.1.1.min.js" defer></script>
-  <script src="js/modernizr-2.8.3.min.js" defer></script>
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
@@ -38,9 +38,9 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="." class="icon icon-home"> HyperCluster</a>
+        <a href=".." class="icon icon-home"> HyperCluster</a>
         <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
@@ -48,7 +48,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
                 <ul>
-                    <li class="toctree-l1"><a class="" href="intro.md">Intoduction</a>
+                    <li class="toctree-l1"><a class="" href="../intro.md">Intoduction</a>
                     </li>
                 </ul>
       </div>
@@ -60,7 +60,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href=".">HyperCluster</a>
+        <a href="..">HyperCluster</a>
       </nav>
 
       
@@ -68,11 +68,11 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".">Docs</a> &raquo;</li>
+    <li><a href="..">Docs</a> &raquo;</li>
     
       
     
-    <li>Intorducion</li>
+    <li>HyperCluster</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -83,21 +83,26 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="intorducion">Intorducion</h1>
-<hr />
-<h2 id="hypercluster">HyperCluster</h2>
-<p>실시간 동기화 Solution을 
-2008년 Windows Version 과 2010년 Linux Version을 C++로 개발 한 적이 있다.
-그 후 2012년 무렵 Windows/Linux를 동시에 c++로 Build가 가능하도록 Cross Build를 
-포함 한 여러가지 기능을 포함하여 프로젝트를 진행하게 되었고 완성 될 무렵 프로젝트가
-엎어지게 되었던 적이 있었고</p>
-<p>몇 년 후 C++ 언어로 다시 Cross Build가 가능하도록 직장 생활 중에 개인적인 시간을 내어가며 개발을 하였으나 공개하지 않았다. 몇 가지 문제가 있어서였는데...</p>
-<p>이 번에서야 GOLANG으로 재 개발하여 공개하게 되었습니다.
-GOLANG으로 Version 0.6.X.X까지 투자 한 시간이 2 Weeks 정도의 Cost가 들었으며
-앞으로 Linux는 Docker Container로 배포하여 Docker-Swarm 또는 Kubernetes 위에 동작이 가능하도록
-준비 할 것이고 File Cache, MP4 스트리밍, 시스템 모니터링 정보 수집등의 기능도 추가 할 예정입니다.</p>
-<pre><code>                                                                                2020.08.01
-</code></pre>
+                <h1 id="hypercluster">HyperCluster</h1>
+<h2 id="0600">0.6.0.0</h2>
+<ul>
+<li>2020.10.01</li>
+<li>실 시시간 동기화 기능<ul>
+<li>rename</li>
+<li>delete</li>
+<li>copy</li>
+<li>change file modified time</li>
+<li>upload</li>
+<li>download</li>
+<li>find</li>
+<li>sync</li>
+<li>purge 기능 추가<ul>
+<li>upload/sync 기능에 적용</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
               
             </div>
           </div>
@@ -128,9 +133,9 @@ GOLANG으로 Version 0.6.X.X까지 투자 한 시간이 2 Weeks 정도의 Cost�
       
     </span>
 </div>
-    <script>var base_url = '.';</script>
-    <script src="js/theme.js" defer></script>
-      <script src="search/main.js" defer></script>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
     <script defer>
         window.onload = function () {
             SphinxRtdTheme.Navigation.enable(true);
@@ -139,8 +144,3 @@ GOLANG으로 Version 0.6.X.X까지 투자 한 시간이 2 Weeks 정도의 Cost�
 
 </body>
 </html>
-
-<!--
-MkDocs version : 1.1.2
-Build Date UTC : 2020-08-02 08:14:10.543001+00:00
--->
