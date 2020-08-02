@@ -8,7 +8,7 @@ markdown_extensions:
 markdown_extensions:
   - admonition
 nav:
-  - Intoduction: intro.md
+  - Introduction: intro.md
   - Key Concepts: keyconc.md
   #- User Guides: guides/index.md
   #- API :
