@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Replica Configuration - HyperCluster Sync for CDN</title>
+  <title>Replica - HyperCluster</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Replica Configuration";
+    var mkdocs_page_name = "Replica";
     var mkdocs_page_input_path = "tutorials\\replica.md";
     var mkdocs_page_url = null;
   </script>
@@ -38,7 +38,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> HyperCluster Sync for CDN</a>
+        <a href="../.." class="icon icon-home"> HyperCluster</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
@@ -48,7 +48,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../..">Intoduction</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../intro/">Intoduction</a>
                     </li>
                 </ul>
                 <ul>
@@ -56,7 +56,19 @@
                     </li>
                 </ul>
                 <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../guides/">User Guides</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../guides/api-v0.6.x.x/">API</a>
+                    </li>
+                </ul>
+                <ul>
                     <li class="toctree-l1"><a class="reference internal" href="../../glossary/">Glossary</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../release-notes/">Release notes</a>
                     </li>
                 </ul>
                 <ul>
@@ -64,47 +76,7 @@
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../release-notes/">Release notes</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">User guide</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../guide/config/">Configuration</a>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../guide/how2use/">API</a>
-                    </li>
-                </ul>
-                <p class="caption"><span class="caption-text">Tutorials</span></p>
-                <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Replica Configuration</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#_1">환경변수 설정</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_2">실 시간 동기화를 위한 환경 설정</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#volume">volume 설정 방법</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#peer">peer 설정 방법</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#cluster">cluster 설정 방법</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#peer_1">peer 실행하기</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#peershostname0">peers.hostname0 실행하기</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#peershostname1">peers.hostname1 실행하기</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#peershostname2">peers.hostname2 실행하기</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#peershostname3">peers.hostname3 실행하기</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
-                    </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../sync/">Synchronization</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../">Tutorials</a>
                     </li>
                 </ul>
       </div>
@@ -116,7 +88,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">HyperCluster Sync for CDN</a>
+        <a href="../..">HyperCluster</a>
       </nav>
 
       
@@ -127,12 +99,8 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
-        
-          <li>Tutorials &raquo;</li>
-        
-      
     
-    <li>Replica Configuration</li>
+    <li>Replica</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -145,7 +113,7 @@
               
                 <h1 id="replica">Replica</h1>
 <p>Replica 설정은 실 시간 동기화가 가능한 설정으로
-Windows <code>Single-Host</code>환경에서 4개의 <code>peer</code>로 Clustering 테스트가 가능하도록 설정하는 방법을 배워 보도록 하겠습니다.</p>
+Windows <strong>Single-Host</strong> 환경에서 4개의 <code>peer</code>로 Clustering이 가능하도록 구성하겠습니다.</p>
 <hr />
 <h2 id="_1">환경변수 설정</h2>
 <ul>
@@ -250,10 +218,11 @@ cluster:
         grant: r
 </code></pre>
 
-<h3 id="volume">volume 설정 방법</h3>
+<hr />
+<h3 id="volume">volume 설정</h3>
 <ul>
-<li>4개의 <code>peer</code>에서 각각 다른 <code>volume</code>을 사용하도록 <code>volumes</code> 섹션에서 4개의 <code>named-volume</code>을 생성하고 <code>mount</code>합니다.<ul>
-<li><code>mount</code> 된 <code>named-volume</code>은 <code>volume-name1</code>, <code>volume-name2</code>, <code>volume-name3</code>, <code>volume-name4</code> 입니다.</li>
+<li>4개의 <code>peer</code>에서 각각 다른 <code>volume</code>을 사용하도록 <code>volumes</code>섹션에서 4개의 <code>named-volume</code>을 생성하고 <code>mount</code>합니다.<ul>
+<li><code>mount</code> 된 <code>named-volume</code>은 <strong>volume-name1</strong>, <strong>volume-name2</strong>, <strong>volume-name3</strong>, <strong>volume-name4</strong> 입니다.</li>
 </ul>
 </li>
 </ul>
@@ -275,19 +244,23 @@ volumes:
     service: d:/data/peer4/cn-1         
 </code></pre>
 
+<hr />
 <h3 id="peer">peer 설정 방법</h3>
 <ul>
-<li><code>peers</code>섹션에 4개의 <code>peer</code> <code>hostname0</code>, <code>hostname1</code>, <code>hostname2</code>, <code>hostname3</code> 을 생성합니다.</li>
-<li><code>peer</code>와 <code>peer</code>간 통신 과 <code>user</code>가 접속이 가능한 <code>IP:Port</code> 를 각 <code>peers.{hostname}.addr</code>에 설정합니다.</li>
-<li>그리고 마지막으로 <code>peer</code>에서 사용 할  <code>volume</code>을  <code>peers.{hostname}.volumes.{named-volume}</code>에 설정합니다<ul>
-<li><code>peers.{hostname}.volumes</code>에 <code>named-volume</code>를 등록합니다.<ul>
-<li><code>peers.hostname0.volumes.repo-name1</code> 에 <code>volumes</code>섹션에서 <code>mount</code>한 <code>volume-name1</code>을 사용하도록 설정.</li>
-<li><code>peers.hostname1.volumes.repo-name1</code> 에 <code>volumes</code>섹션에서 <code>mount</code>한 <code>volume-name2</code>을 사용하도록 설정.</li>
-<li><code>peers.hostname2.volumes.repo-name1</code> 에 <code>volumes</code>섹션에서 <code>mount</code>한 <code>volume-name3</code>을 사용하도록 설정.</li>
-<li><code>peers.hostname3.volumes.repo-name1</code> 에 <code>volumes</code>섹션에서 <code>mount</code>한 <code>volume-name4</code>을 사용하도록 설정.</li>
+<li><code>peers</code>섹션에 4개의 <code>peer</code> <strong>hostname0</strong>, <strong>hostname1</strong>, <strong>hostname2</strong>, <strong>hostname3</strong> 를 준비합니다.</li>
+<li><code>peer</code>와 <code>peer</code>간 통신 과 <code>user(사용자)</code>가 접속이 가능한 <code>IP:Port</code> 를 각 <code>peers.{hostname}.addr</code>에 설정합니다.</li>
 </ul>
-</li>
-</ul>
+<div class="admonition tip">
+<p class="admonition-title">참고</p>
+<p><strong><em>{hostname}</em></strong>는 <code>peers</code>섹션에서 준비한 <code>peer</code> 이름입니다. </p>
+</div>
+<ul>
+<li>
+<p>그리고 마지막으로 <code>peer</code>에서 사용 할  <code>volume</code>을  <code>peers.{hostname}.volumes.{named-volume}</code>에 설정합니다</p>
+<ol>
+<li><code>peers.{hostname}.volumes</code>에 <code>named-volume</code>를 등록합니다.</li>
+<li><code>volumes</code>섹션에서 <code>mount</code>한 <code>named-volume</code>을 <code>peers.{hostname}.volumes.{named-volume}</code>와 연결합니다.</li>
+</ol>
 </li>
 </ul>
 <pre><code> peers:
@@ -316,23 +289,41 @@ volumes:
 </code></pre>
 
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">참고</p>
 <p><code>peer</code>의 <code>volume</code> 은 여러개 등록 가능합니다.</p>
 </div>
-<h3 id="cluster">cluster 설정 방법</h3>
-<p><code>cluster</code>섹션은 여러 개의 <code>named-cluster</code>등록이 가능하지만 이번 <code>tutorials</code>에서는 <code>replica</code>역할이 가능한 <code>cluster</code>하나만 등록하도록 하겠습니다.</p>
+<hr />
+<h3 id="cluster">cluster 설정</h3>
+<p><code>cluster</code>섹션은 여러 개의 <code>named-cluster</code>등록이 가능하지만 본 <strong><em>Tutorials</em></strong>에서는 <strong>replica</strong>역할이 가능한 <code>cluster</code>하나만 등록하도록 하겠습니다.</p>
 <ul>
-<li><code>cluster</code>섹션에 <code>replica-name1</code>이라는 <code>named-cluster</code>를 등록 합니다.</li>
-<li><code>cluster.replica-name1.role</code>에 <code>replica</code>로 설정하여  <code>replica-name1</code>은 <code>실 시간 동기화</code>가 가능하도록 설정합니다.</li>
-<li><code>replica-name1</code>에 참여할 <code>peer</code>를 <code>peers</code>센션에서 정의한 <code>peer</code>들 중에서 선택하여  <code>cluster.replica-name1.peers</code>에 등록 합니다.</li>
-<li>다음은 <code>peer</code>들이 사용할 <code>volume</code>을 선택합니다.<ul>
-<li><code>cluster.replica-name1.peers.hostname0.volume</code>에 <code>peers.hostname0.volumes</code>에서 등록한 <code>named-volume</code> <code>repo-name1</code>를 설정.</li>
-<li><code>cluster.replica-name1.peers.hostname1.volume</code>에 <code>peers.hostname1.volumes</code>에서 등록한 <code>named-volume</code> <code>repo-name1</code>를 설정.</li>
-<li><code>cluster.replica-name1.peers.hostname2.volume</code>에 <code>peers.hostname1.volumes</code>에서 등록한 <code>named-volume</code> <code>repo-name1</code>를 설정.</li>
-<li><code>cluster.replica-name1.peers.hostname3.volume</code>에 <code>peers.hostname1.volumes</code>에서 등록한 <code>named-volume</code> <code>repo-name1</code>를 설정.</li>
+<li><code>cluster</code>섹션에 <strong>replica-name1</strong>이라는 <code>named-cluster</code>를 등록 합니다.</li>
+<li>
+<p><code>cluster.replica-name1.role</code>에 <strong>replica</strong>로 설정하여  <strong>replica-name1</strong>은 <code>실 시간 동기화</code>가 가능하도록 설정합니다.</p>
+</li>
+<li>
+<p><strong>replica-name1</strong>에 참여 할 <code>peer</code>를 <code>peers</code>센션에서 준비한 <code>peer</code>를 선택하여  <code>cluster.{named-cluster}.peers</code>에 등록 합니다.</p>
+</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">참고</p>
+<p><code>cluster</code>에 등록한 <code>named-cluster</code>는 <strong>replica-name1</strong> 입니다.  <br />
+다시 말 하면 <code>{named-cluster}</code>부분을 <strong>replica-name1</strong>으로 변경하면 됩니다.</p>
+</div>
+<ul>
+<li>
+<p>다음은 <code>cluster</code>에 참여한 <code>peer</code>들이 사용 할 <code>volume</code>을 선택합니다.
+  <code>cluster.{named-cluster}.peers.{hostname}.volume</code>에 <code>peers.{hostname}.volumes</code>에서 <code>mount</code>한
+  <code>named-volume</code>을 사용하도록 등록합니다.</p>
+<ul>
+<li><code>cluster.replica-name1.peers.hostname0.volume</code>는 <code>peers.hostname0.volumes</code>에서 등록한 <code>named-volume</code> <code>repo-name1</code>를 연결합니다.</li>
+<li><code>cluster.replica-name1.peers.hostname1.volume</code>는 <code>peers.hostname1.volumes</code>에서 등록한 <code>named-volume</code> <code>repo-name1</code>를 연결합니다.</li>
+<li><code>cluster.replica-name1.peers.hostname2.volume</code>는 <code>peers.hostname1.volumes</code>에서 등록한 <code>named-volume</code> <code>repo-name1</code>를 연결합니다.</li>
+<li><code>cluster.replica-name1.peers.hostname3.volume</code>는 <code>peers.hostname1.volumes</code>에서 등록한 <code>named-volume</code> <code>repo-name1</code>를 연결합니다.</li>
 </ul>
 </li>
-<li>끝으로 <code>replica-name1</code>을 사용할 <code>user</code> 와 <code>grant</code>를 등록 합니다.<ul>
+<li>
+<p>끝으로 <strong>replica-name1</strong>을 사용할 <code>user</code> 와 <code>grant</code>를 등록 설정합니다.</p>
+<ul>
 <li>등록가능한 <code>user</code>는 <code>users</code>섹션에 등록이 되어 있어야 합니다.</li>
 </ul>
 </li>
@@ -396,24 +387,10 @@ volumes:
 </ul>
 <pre><code>c:&gt;hypercluster
 </code></pre>
-
-<ul>
-<li><a href="../sync/">Synchronization cluster 구성하기</a></li>
-</ul>
-<p><img alt="대체 텍스트" src="../../images/github.png" /></p>
               
             </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../sync/" class="btn btn-neutral float-right" title="Synchronization">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../../guide/how2use/" class="btn btn-neutral" title="API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
@@ -437,10 +414,6 @@ volumes:
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../../guide/how2use/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../sync/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
