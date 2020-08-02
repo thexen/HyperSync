@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Configurations - HyperCluster</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Configurations";
+    var mkdocs_page_input_path = "guides\\clustering-config.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> HyperCluster</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../../intro.md">Intoduction</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">HyperCluster</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Configurations</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="configurations">Configurations</h1>
+<p><strong><em> 클러스터링 환경 설정 안내서</em></strong></p>
+<hr />
+<h2 id="_1">환경 변수</h2>
+<ul>
+<li><code>HYPERCLUSTER_PEER_HOSTNAME</code> - hostname 설정.(default: Windows의 경우 컴퓨터 이름, Linux의 경우 hostname으로 자동 설정됩니다.)</li>
+<li><code>HYPERCLUSTER_PEER_PREFERENCE_FILE</code> - 클러스터 설정 파일.(default: <code>./config/preference.yaml</code>)</li>
+<li><code>HYPERCLUSTER_PEER_LOG_PREFERENCE_FILE</code> - 로그 설정 파일.(default: <code>./config/log.yaml</code>)</li>
+<li><code>HYPERCLUSTER_PEER_TLS_ENABLE</code> - TLS 사용 여부.(default: <code>DISABLE</code>)</li>
+<li><code>HYPERCLUSTER_PEER_TLS_CERT</code> - <code>crt</code> 파일.(default: <code>./cert/public.crt</code>)</li>
+<li><code>HYPERCLUSTER_PEER_TLS_KEY</code> - <code>key</code> 파일.(default: <code>./cert/private.key</code>)</li>
+<li><code>HYPERCLUSTER_PEER_ADVERTISE_URL</code> - cluster peer 관리 서버 URL.( <code>미지원상태</code>)</li>
+</ul>
+<hr />
+<h2 id="_2">클러스터 설정</h2>
+<p><code>preference.yaml</code>파일에는 4개의 섹션이 있습니다.</p>
+<ul>
+<li>volumes</li>
+<li>peers</li>
+<li>users</li>
+<li>cluster</li>
+</ul>
+<p><code>volumes</code>섹션은 <code>peer</code>가 사용 할 <code>volume</code>을 준비 할 수 있습니다.
+<strong>service</strong> 경로와 <strong>temporary</strong>경로를 설정하여야 하며 <code>peer</code>는 <strong>upload</strong>와<strong>sync</strong> 명령을 요청 받으면  Content를 저장하게 되는데 <strong>service</strong> 중인 파일이 오염되지 않도록 <strong>temporary</strong> 경로로 저장한 후 전송이 완료 되면 <strong>service</strong>중인 Content 와 Swap을 하여 <strong>service</strong>중인 파일의 무결성을 보장 합니다.</p>
+<p><code>peers</code>섹션은 <strong>hostname</strong>, <strong>address:port</strong>, <strong>volumes</strong>를 설정하여 <code>cluster</code>에 참여 할 수 있도록 준비 합니다.</p>
+<p><code>users</code>섹션은 <code>cluster</code>를 사용 할 <strong>user</strong>를 정의 하며</p>
+<p><code>cluster</code>섹션은 <strong>named-cluster</strong>로 여러개의 <strong>group</strong>으로 구성 할 수 있고 <strong>named-cluster</strong> 마다 <strong>role</strong>을 정의하여 다른 역할을 가진 <code>cluster</code>로 구성을 할 수 있습니다. <strong>named-cluster</strong>에 참여할 <code>peer</code>와 <code>user</code> 그리고 <code>access log</code>를 저장할 <strong>ElasticSearch URL</strong> 정보를 등록 하면 설정이 마무리 됩니다.
+<code>cluster</code>의 <strong>role</strong>은 <strong>restapi</strong>, <strong>replica</strong>, <strong>advertisement</strong> 가 있습니다.</p>
+<p><code>cluster</code> 설정 파일인 <code>preference.yaml</code>의 기본 구조를 설명 하겠습니다.</p>
+<pre><code>#Section: volumes
+volumes:
+  volume-name1: 
+    temporary: 
+    service:
+
+#Section: peers    
+peers:
+  hostname1:
+    addr: 
+    volumes: 
+      repo-name1: volume-name1
+      repo-name2:
+        temporary: 
+        service:
+
+#Section: user
+users:
+  admin:
+    pwd: admin
+  user1:
+    pwd: user1
+
+#Section: cluster          
+cluster: 
+  restapi:
+    role: restapi
+    elasticsearch: 
+    api:
+      - status
+    peers:
+      - hostname1
+    users:
+      - admin
+  replica-name1:
+    role: replica
+    elasticsearch-url: 
+    peers:
+      hostname1: 
+        volume: repo-name1
+    users:
+      admin:
+        grant: rwds
+      user1:
+        grant: r
+      anonymous:
+        grant: r
+   replica-name2:
+     role: advertisement
+     elasticsearch:
+     peers:
+     users:
+</code></pre>
+<p><code>volumes</code>섹션에서 named-volume 인 volume-name1를 정의 하였습니다.
+<code>peers</code>섹션의 hostname1.volumes 에서 정의한 <code>named-volume</code> 인 <strong>repo-name1</strong>는 <code>volumes</code>에서 정의한 volume-name1을 <code>mount</code> 하였습니다.</p>
+<p><code>peer</code>의 <code>volumes</code>는 <code>volumes</code>섹션에서 정의 하지 않아도 <code>named-volume</code>을 <code>mount</code> 할 수 있습니다.
+ <code>peers</code>섹션의 <strong>hostname1</strong>는 Winodws에서는 컴퓨터 이름, Linux에서는 Host Name과 동일 하여야 합니다.</p>
+<div class="admonition warning">
+<p><code>peers</code>섹션의
+<strong>hostname1</strong>는 Winodws에서는 컴퓨터 이름, Linux에서는 Host Name과 동일 하여야 하며 <strong>addr</strong>는 <strong>peer</strong> 간 통신이 가능한 <strong>ip:port</strong>로 설정 되어야 합니다.</p>
+</div>
+<p><code>cluster</code>섹션에서 정의한 <strong>named-cluster*<em> 인 <strong>replica-name1</strong>의 설정을 보면  </em></strong>실시간 동기화<strong><em> 기능을 사용하기 위해 </em>*role</strong>을 <strong>replica</strong>로 설정 하였습니다.</p>
+<p><strong>replica-name1</strong>에 참여한 <code>peer</code>는 <strong>hostname1</strong>이며 
+<strong>hostname1</strong>이 사용 할 <code>volume</code>은 <code>peers</code>센셕에서 정의한 <strong>hostname1</strong>의 <strong>named-volume</strong> <strong>repo-name1</strong> 사용하도록 설정 하였습니다.</p>
+<p><strong>replica-name1</strong>에 접근 가능한 사용자는 <code>users</code>센션에서 정의된 <strong>admin</strong>와 <strong>user1</strong> 이고 익명 사용자인 <code>anonymous</code>도 접근이 가능하게 설정 하였습니다.
+<strong>admin</strong>의 <code>grant</code>를 <strong>rwds</strong> 설정하여 모든 권한을 부여하였고 <strong>user1</strong>과 <code>anonymous</code>는  가 <code>r</code>인 읽기 권한만 부여하였습니다.</p>
+<div class="admonition note">
+<p><code>grant</code>는 <code>r</code>: 읽기 권한, <code>w</code>: 쓰기 권한, <code>d</code>: 삭제 권한, <code>s</code>: 수동 동기 권한 이 있습니다.</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">주의</p>
+<p><code>users</code>에 <code>anonymous</code>을 추가 하면 익명사용자 이므로 인증을 하지 않으니 주의 하여야 합니다.</p>
+</div>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
