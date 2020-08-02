@@ -7,12 +7,18 @@ markdown_extensions:
     separator: "_"
 markdown_extensions:
   - admonition
-pages:
+nav:
   - Intoduction: intro.md
   - Key Concepts: keyconc.md
   - User Guides: guides/index.md
-  - API : guides/api-v0.6.x.x.md
+  - API :
+    - guides/api-v0.6.x.x.md
+    - guides\clustering-config.md
+    - guides\logging-config.md
   - Glossary: glossary.md
   - Release notes: release-notes.md
   - License: license.md
-  - Tutorials: tutorials/index.md    
+  - Tutorials: 
+    - tutorials/index.md    
+    - tutorials\replica.md
+    - tutorials\sync.md

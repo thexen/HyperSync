@@ -20,4 +20,3 @@ GOLANG으로 Version 0.6.X.X까지 투자 한 시간이 2 Weeks 정도의 Cost�
 
                                                                                     2020.08.01
 
-![대체 텍스트](../images/github.png)

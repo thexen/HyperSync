@@ -13,6 +13,3 @@
 사용자가 `SYNC`명령을 ***Lead Peer***에게 요청하면 ***Lead Peer***는 ***Base Peer***로 임시 전환 되며 사용자가 요청한 `cluster`에 첨여 한 `Peer`중에서 임시 ***Lead Peer***를 선출 하여 ***Base Peer***와 통신을 하게 됩니다.
 
 ***Base Peer***에 있는 Content를 임시 ***Lead Peer***에게 전송하여 `cluster`에 참여한 다른 모든 `peer`에게도 전달이 가능하도록 합니다.
-
-
-![대체 텍스트](../images/github.png)
