@@ -1,4 +1,5 @@
-# Key Concepts
+## Synchronization
 
+* 실 시간 동기화 Key Concepts
 
-![imag]( ../images/key-concept.png)
+![img]( images/key-concept.png)

@@ -1,10 +1,14 @@
 # 용어 사전
 
+----
+
 ## Lead Peer
 사용자가 `Cluster`를 사용하기 위해 연결한 `Peer`.
 
 사용자가 Clustering 명령 ***Lead Peer***에게 요청하면 사용자가 요청한 `cluster`에 참여한 `peer`에게
 ***Lead Peer***가  수행 명령을 전달 하고 수집하여 사용자에게 응답합니다.
+
+----
 
 ## Base Peer
 사용자가 `SYNC`명령을 전달하고 결과를 응답 받기 위해 연결한 `peer`.

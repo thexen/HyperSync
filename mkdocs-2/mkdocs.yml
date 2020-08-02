@@ -10,15 +10,11 @@ markdown_extensions:
 nav:
   - Introduction: intro.md
   - Key Concepts: keyconc.md
-  #- User Guides: guides/index.md
-  #- API :
-  #  - guides/api-v0.6.x.x.md
-  #  - guides\clustering-config.md
-  #  - guides\logging-config.md
+  - User Guides: guides/index.md
+  - API:
+    - 'Version 0.6.X.X': 'guides/api-v0.6.x.x.md'
   - Glossary: glossary.md
   - Release notes: release-notes.md
   - License: license.md
-  #- Tutorials: 
-  #  - tutorials/index.md    
-  #  - tutorials\replica.md
-  #  - tutorials\sync.md
+  - Tutorials: tutorials/index.md
+
