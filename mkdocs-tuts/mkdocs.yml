@@ -7,7 +7,7 @@ markdown_extensions:
     separator: "_"
 markdown_extensions:
   - admonition
-nav:
+pages:
   - Intoduction: intro.md
   - Key Concepts: keyconc.md
   - User Guides: guides/index.md
