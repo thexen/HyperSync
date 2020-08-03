@@ -1,6 +1,6 @@
 # Configurations 
 
-*** 클러스터링 환경 설정 안내서***
+***클러스터링 환경 설정 안내서***
 
 ----
 
@@ -30,7 +30,8 @@
 
 `peers`섹션은 **hostname**, **address:port**, **volumes**를 설정하여 `cluster`에 참여 할 수 있도록 준비 합니다.
 
-`users`섹션은 `cluster`를 사용 할 **user**를 정의 하며
+`users`섹션은 `cluster`를 사용 할 **user**를 정의 하며 비밀번호와 허용IP를 등록합니다.
+허용IP는 `users.{user}.net`에 `CIDR`표기 방식으로 입력하면 됩니다.
 
 `cluster`섹션은 **named-cluster**로 여러개의 **group**으로 구성 할 수 있고 **named-cluster** 마다 **role**을 정의하여 다른 역할을 가진 `cluster`로 구성을 할 수 있습니다. **named-cluster**에 참여할 `peer`와 `user` 그리고 `access log`를 저장할 **ElasticSearch URL** 정보를 등록 하면 설정이 마무리 됩니다.
 `cluster`의 **role**은 **restapi**, **replica**, **advertisement** 가 있습니다.
@@ -57,6 +58,8 @@
     users:
       admin:
         pwd: admin
+        net: 
+          - 127.0.0.1/24
       user1:
         pwd: user1						
 

@@ -113,7 +113,7 @@
             <div class="section">
               
                 <h1 id="configurations">Configurations</h1>
-<p><strong><em> 클러스터링 환경 설정 안내서</em></strong></p>
+<p><strong><em>클러스터링 환경 설정 안내서</em></strong></p>
 <hr />
 <h2 id="_1">환경 변수</h2>
 <ul>
@@ -137,7 +137,8 @@
 <p><code>volumes</code>섹션은 <code>peer</code>가 사용 할 <code>volume</code>을 준비 할 수 있습니다.
 <strong>service</strong> 경로와 <strong>temporary</strong>경로를 설정하여야 하며 <code>peer</code>는 <strong>upload</strong>와<strong>sync</strong> 명령을 요청 받으면  Content를 저장하게 되는데 <strong>service</strong> 중인 파일이 오염되지 않도록 <strong>temporary</strong> 경로로 저장한 후 전송이 완료 되면 <strong>service</strong>중인 Content 와 Swap을 하여 <strong>service</strong>중인 파일의 무결성을 보장 합니다.</p>
 <p><code>peers</code>섹션은 <strong>hostname</strong>, <strong>address:port</strong>, <strong>volumes</strong>를 설정하여 <code>cluster</code>에 참여 할 수 있도록 준비 합니다.</p>
-<p><code>users</code>섹션은 <code>cluster</code>를 사용 할 <strong>user</strong>를 정의 하며</p>
+<p><code>users</code>섹션은 <code>cluster</code>를 사용 할 <strong>user</strong>를 정의 하며 비밀번호와 허용IP를 등록합니다.
+허용IP는 <code>users.{user}.net</code>에 <code>CIDR</code>표기 방식으로 입력하면 됩니다.</p>
 <p><code>cluster</code>섹션은 <strong>named-cluster</strong>로 여러개의 <strong>group</strong>으로 구성 할 수 있고 <strong>named-cluster</strong> 마다 <strong>role</strong>을 정의하여 다른 역할을 가진 <code>cluster</code>로 구성을 할 수 있습니다. <strong>named-cluster</strong>에 참여할 <code>peer</code>와 <code>user</code> 그리고 <code>access log</code>를 저장할 <strong>ElasticSearch URL</strong> 정보를 등록 하면 설정이 마무리 됩니다.
 <code>cluster</code>의 <strong>role</strong>은 <strong>restapi</strong>, <strong>replica</strong>, <strong>advertisement</strong> 가 있습니다.</p>
 <p><code>cluster</code> 설정 파일인 <code>preference.yaml</code>의 기본 구조를 설명 하겠습니다.</p>
@@ -161,6 +162,8 @@ peers:
 users:
   admin:
     pwd: admin
+    net: 
+      - 127.0.0.1/24
   user1:
     pwd: user1
 
