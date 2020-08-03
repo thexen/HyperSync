@@ -12,7 +12,7 @@
 `users.{user}.net`을 등록하지 않는다면 모든 IP가 허용 됩니다.
 
 ```
-#Section: user
+#Section: users
 users:
   admin:
     pwd: admin
@@ -45,7 +45,7 @@ users:
 
 !!! note ""
     `grant`등록은 사용자의 계정에서 등록 하는 것이 아닌 `named-cluster`를 사용하는 사용자를 대상으로 등록합니다.    
-    `cluster.{named-cluster}.user.{user}.grant` 입니다.
+    `cluster.{named-cluster}.users.{user}.grant` 입니다.
 
 ```
     #Section: cluster          

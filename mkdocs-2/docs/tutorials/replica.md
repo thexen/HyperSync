@@ -78,7 +78,7 @@ volumes:
       repo-name1: volume-name4
    
 #####################################################      
-#Section: user
+#Section: users
 #####################################################      
 users:
   admin:

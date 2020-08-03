@@ -54,7 +54,7 @@
             temporary: 
             service: 
    
-    #Section: user
+    #Section: users
     users:
       admin:
         pwd: admin
