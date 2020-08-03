@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Configurations - HyperCluster</title>
+  <title>Security - HyperCluster</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Configurations";
-    var mkdocs_page_input_path = "guides\\logging-config.md";
+    var mkdocs_page_name = "Security";
+    var mkdocs_page_input_path = "guides\\security.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -101,7 +101,7 @@
     
       
     
-    <li>Configurations</li>
+    <li>Security</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -112,41 +112,65 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="configurations">Configurations</h1>
-<p><strong><em>로깅 환경 설정 안내서</em></strong></p>
+                <h1 id="security">Security</h1>
+<p><strong><em>보안 설정 안내서</em></strong></p>
 <hr />
-<h2 id="_1">로그 설정</h2>
-<p>두 종류의 로그를 저장 합니다.</p>
-<ul>
-<li>trace</li>
-<li>access</li>
-</ul>
-<p><code>trace</code>로그는 <strong>painc</strong>, <strong>error</strong> 등 <strong>debug</strong> 정보나 <strong>issue</strong> 처리를 위한 로그 입니다.</p>
-<p><code>access</code>로그는 <code>clustering</code> 작업 처리 결과를 저장하는 로그이며 <strong>ElasticSearch</strong>와 직접 연계가 가능하도록 <strong>JSON</strong> 형태로 저장됩니다.</p>
-<pre><code>logs:
-  trace:
-    path:
-    debug: true
-    level: 99
-    rotacnt: 30
-    rotafreq: 86400
-  access:
-    path:
-    debug: false
-    level: 0
-    rotacnt: 30
-    rotafreq: 86400
-</code></pre>
-<ul>
-<li><code>path</code> - 로그가 저장될 경로</li>
-<li><code>debug</code> - 소스 위치 출력</li>
-<li><code>level</code> - 저장할 로그의 범위 정의</li>
-<li><code>rotacnt</code> - 로그 로테이션 갯수</li>
-<li><code>rotafreq</code> - 로그 로테이션 주기(sec)</li>
-</ul>
-<div class="admonition tip">
-<p>HyperCluster의 로그는 rotation 기능이 있습니다.</p>
+<h2 id="ip">사용자 허용 IP 설정</h2>
+<p>사용자의 계정별로 접속 허용 IP를 등록 할 수 있습니다.</p>
+<p><code>users.{user}.net</code>에 CIDR 표기로 하나 이상 등록이 가능하며,
+<code>users.{user}.net</code>을 등록하지 않는다면 모든 IP가 허용 됩니다.</p>
+<div class="admonition danger">
+<p class="admonition-title">주의</p>
+<p><code>anonymous</code>는 모든 IP가 허용되며 인증을 하지 않습니다.</p>
 </div>
+<div class="admonition danger">
+<p class="admonition-title">등록 적용이 되지 않는 경우<p>CIDR 표기가 아닐 경우( 192.168.243 )     <br />
+등록시 <code>,</code>로 동시에 여러개 등록 할 경우 ( - 127.0.0.1/24, 192.168.243.102/32 )     </p>
+</p>
+</div>
+<pre><code>#Section: user
+users:
+  admin:
+    pwd: admin
+    net: #CIDR 표기
+      - 127.0.0.1/24       
+      - 192.168.243.102/32
+  user1:
+    pwd: user1              
+</code></pre>
+
+<hr />
+<h2 id="cluster-grant">Cluster 사용자의 grant 설정</h2>
+<p><code>cluster</code>사용 허가를 받은 사용자에 한해 <code>grant</code> 등록을 할 수 있습니다.
+<code>grant</code>등록을 하지 않는다면 모든 권한을 부여 받게 됩니다.</p>
+<div class="admonition note">
+<p><code>r</code>: 읽기 권한 - GET, HEAD, POST Mehtod  <br />
+<code>w</code>: 쓰기 권한 - PUT Method <br />
+<code>d</code>: 삭제 권한 - DELETE Method <br />
+<code>s</code>: 수동 동기 권한 - SYNC Mehod     </p>
+</div>
+<div class="admonition note">
+<p><code>grant</code>등록은 사용자의 계정에서 등록 하는 것이 아닌 <code>named-cluster</code>를 사용하는 사용자를 대상으로 등록합니다.  <br />
+<code>cluster.{named-cluster}.user.{user}.grant</code> 입니다.</p>
+</div>
+<pre><code>    #Section: cluster          
+    cluster: 
+      replica-name1:
+        role: replica
+        elasticsearch-url: 
+        peers:
+          hostname1: 
+            volume: repo-name1
+        users:
+          admin:
+            grant: rwds
+          user1:
+            grant: r
+          anonymous:
+            grant: r
+</code></pre>
+
+<hr />
               
             </div>
           </div>
