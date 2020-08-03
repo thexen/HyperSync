@@ -119,15 +119,6 @@
 <p>사용자의 계정별로 접속 허용 IP를 등록 할 수 있습니다.</p>
 <p><code>users.{user}.net</code>에 CIDR 표기로 하나 이상 등록이 가능하며,
 <code>users.{user}.net</code>을 등록하지 않는다면 모든 IP가 허용 됩니다.</p>
-<div class="admonition danger">
-<p class="admonition-title">주의</p>
-<p><code>anonymous</code>는 모든 IP가 허용되며 인증을 하지 않습니다.</p>
-</div>
-<div class="admonition danger">
-<p class="admonition-title">등록 적용이 되지 않는 경우<p>CIDR 표기가 아닐 경우( 192.168.243 )     <br />
-등록시 <code>,</code>로 동시에 여러개 등록 할 경우 ( - 127.0.0.1/24, 192.168.243.102/32 )     </p>
-</p>
-</div>
 <pre><code>#Section: user
 users:
   admin:
@@ -139,6 +130,15 @@ users:
     pwd: user1              
 </code></pre>
 
+<div class="admonition danger">
+<p class="admonition-title">주의</p>
+<p><code>anonymous</code>는 모든 IP가 허용되며 인증을 하지 않습니다.</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">등록 적용이 되지 않는 경우<p>CIDR 표기가 아닐 경우( 192.168.243 )     <br />
+등록시 <code>,</code>로 동시에 여러개 등록 할 경우 ( - 127.0.0.1/24, 192.168.243.102/32 )     </p>
+</p>
+</div>
 <hr />
 <h2 id="cluster-grant">Cluster 사용자의 grant 설정</h2>
 <p><code>cluster</code>사용 허가를 받은 사용자에 한해 <code>grant</code> 등록을 할 수 있습니다.
