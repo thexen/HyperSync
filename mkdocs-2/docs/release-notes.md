@@ -17,17 +17,20 @@
 ----
 ## Version 0.6.0.0
  * 2020.10.01
- * 실 시시간 동기화 기능
+ * Clustering
+ * Synchronization
     * rename
     * delete
     * copy
-    * change file modified time
+    * change modified file time
     * upload
     * download
     * find
     * sync
-    * purge
-        * upload/sync 명령에서 `URI Query` 사용 가능
+    * uri quri
+        * purge    
+        * pretty
+        
 
 ----
 
