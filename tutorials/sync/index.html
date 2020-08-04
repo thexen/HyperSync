@@ -113,7 +113,184 @@
             <div class="section">
               
                 <h1 id="_1">준비중...</h1>
-<p><img alt="대체 텍스트" src="../../images/github.png" /></p>
+<p><strong><em>본 테스트는 API 사용 방법을 포함합니다.</em></strong></p>
+<p>본 테스트는 Tutorials의 <a href="../replica/">Setting up an Replica On Single-Host</a>의 구성을 사용합니다.
+<img alt="대체 텍스트" src="../../images/github.png" /></p>
+<hr />
+<h2 id="_2">테스트 방법</h2>
+<div class="admonition tip">
+<p>우리는 테스트를 위해 <strong><em>Chrome Talend API Test Tool</em></strong>을 사용 할 것이며  <br />
+동기화 요청에 사용한 HTTP Request와 동기화 요청 결과의 JSON만을 표시합니다.  <br />
+단 업로드 테스트만 테스트 방법을 설명드리고자 전체 화면 캡쳐로 진행합니다.</p>
+</div>
+<hr />
+<h2 id="_3">업로드</h2>
+<h6 id="peer-volume">업로드 전 peer volume 내용 확인</h6>
+<p>그림을 보시면 모든 <code>peer</code>의 <code>volume</code>은 파일이 없는 상태입니다.
+테스트 진행 전  <code>peer</code>의 <code>volume</code>을 확인하면서 진행 하시기 바랍니다.</p>
+<p><img alt="업로드전" src="../../images/upload-001.png" /></p>
+<h6 id="_4">업로드 요청하기</h6>
+<p>20bytes 크기의 1.txt 파일을 업로드 하겠습니다.</p>
+<div class="admonition tip">
+<p>upload api</p>
+</div>
+<pre><code>PUT /replica-name1/11.txt?pretty HTTP/1.1
+Host: 127.0.0.1:8080
+Connection: Close
+Authorization: Basic YWRtaW46YWRtaW4=
+Content-Length: 20
+
+12345678901234567890
+</code></pre>
+
+<div class="admonition danger">
+<p>Chrome의 Talend API Test 툴을 사용하여 업로드 합니다.  <br />
+uri query에 pretty를 추가 하시면 가독성이 좋은 JSON으로 응답을 받을 수 있습니다.</p>
+</div>
+<p><img alt="업로드 " src="../../images/upload-000.png" /></p>
+<h6 id="_5">업로드 결과</h6>
+<p><code>peer</code>의 <code>volume</code>을 보시면 20bytes의 1.txt가 저장 되었습니다.</p>
+<p><img alt="업로드 결과 " src="../../images/upload-002.png" /></p>
+<p>업로드 요청 결과는 아래 JSON과 같이 <strong><em>Chrome Talend API Test Tool</em></strong>에서 확인이 가능합니다.</p>
+<pre><code>{
+  &quot;tx&quot;: &quot;1230c013-6076-4297-bfd0-4af08057d8d3&quot;,
+  &quot;code&quot;: 200,
+  &quot;Succeeded&quot;: 4,
+  &quot;Failed&quot;: 0,
+  &quot;results&quot;: [
+    {
+      &quot;command&quot;: &quot;upload&quot;,
+      &quot;tx&quot;: &quot;1230c013-6076-4297-bfd0-4af08057d8d3&quot;,
+      &quot;code&quot;: 200,
+      &quot;host&quot;: &quot;hostname2&quot;,
+      &quot;result&quot;: &quot;succeeded&quot;,
+      &quot;reason&quot;: {
+        &quot;error&quot;: &quot;&quot;,
+        &quot;where&quot;: &quot;&quot;
+      },
+      &quot;cluster&quot;: {
+        &quot;cluster_name&quot;: &quot;replica-name1&quot;,
+        &quot;cluster_role&quot;: &quot;replica&quot;,
+        &quot;peers&quot;: &quot;hostname0,hostname1,hostname2,hostname3&quot;,
+        &quot;peers_count&quot;: 4,
+        &quot;lead_peer&quot;: &quot;hostname0&quot;,
+        &quot;child_peers&quot;: &quot;&quot;
+      },
+      &quot;request&quot;: {
+        &quot;user&quot;: &quot;admin&quot;,
+        &quot;uri&quot;: &quot;/replica-name1/1.txt&quot;,
+        &quot;query&quot;: &quot;pretty&quot;,
+        &quot;srcuri&quot;: &quot;&quot;,
+        &quot;range&quot;: &quot;&quot;
+      },
+      &quot;stat&quot;: {
+        &quot;trans_amount&quot;: 20,
+        &quot;time&quot;: &quot;Tue,  4 Aug 2020 12:39:55 GMT&quot;,
+        &quot;time_taken&quot;: &quot;9.9731ms&quot;
+      },
+      &quot;response&quot;: null
+    },
+    {
+      &quot;command&quot;: &quot;upload&quot;,
+      &quot;tx&quot;: &quot;1230c013-6076-4297-bfd0-4af08057d8d3&quot;,
+      &quot;code&quot;: 200,
+      &quot;host&quot;: &quot;hostname3&quot;,
+      &quot;result&quot;: &quot;succeeded&quot;,
+      &quot;reason&quot;: {
+        &quot;error&quot;: &quot;&quot;,
+        &quot;where&quot;: &quot;&quot;
+      },
+      &quot;cluster&quot;: {
+        &quot;cluster_name&quot;: &quot;replica-name1&quot;,
+        &quot;cluster_role&quot;: &quot;replica&quot;,
+        &quot;peers&quot;: &quot;hostname0,hostname1,hostname2,hostname3&quot;,
+        &quot;peers_count&quot;: 4,
+        &quot;lead_peer&quot;: &quot;hostname0&quot;,
+        &quot;child_peers&quot;: &quot;&quot;
+      },
+      &quot;request&quot;: {
+        &quot;user&quot;: &quot;admin&quot;,
+        &quot;uri&quot;: &quot;/replica-name1/1.txt&quot;,
+        &quot;query&quot;: &quot;pretty&quot;,
+        &quot;srcuri&quot;: &quot;&quot;,
+        &quot;range&quot;: &quot;&quot;
+      },
+      &quot;stat&quot;: {
+        &quot;trans_amount&quot;: 20,
+        &quot;time&quot;: &quot;Tue,  4 Aug 2020 12:39:55 GMT&quot;,
+        &quot;time_taken&quot;: &quot;8.9733ms&quot;
+      },
+      &quot;response&quot;: null
+    },
+    {
+      &quot;command&quot;: &quot;upload&quot;,
+      &quot;tx&quot;: &quot;1230c013-6076-4297-bfd0-4af08057d8d3&quot;,
+      &quot;code&quot;: 200,
+      &quot;host&quot;: &quot;hostname1&quot;,
+      &quot;result&quot;: &quot;succeeded&quot;,
+      &quot;reason&quot;: {
+        &quot;error&quot;: &quot;&quot;,
+        &quot;where&quot;: &quot;&quot;
+      },
+      &quot;cluster&quot;: {
+        &quot;cluster_name&quot;: &quot;replica-name1&quot;,
+        &quot;cluster_role&quot;: &quot;replica&quot;,
+        &quot;peers&quot;: &quot;hostname0,hostname1,hostname2,hostname3&quot;,
+        &quot;peers_count&quot;: 4,
+        &quot;lead_peer&quot;: &quot;hostname0&quot;,
+        &quot;child_peers&quot;: &quot;hostname3&quot;
+      },
+      &quot;request&quot;: {
+        &quot;user&quot;: &quot;admin&quot;,
+        &quot;uri&quot;: &quot;/replica-name1/1.txt&quot;,
+        &quot;query&quot;: &quot;pretty&quot;,
+        &quot;srcuri&quot;: &quot;&quot;,
+        &quot;range&quot;: &quot;&quot;
+      },
+      &quot;stat&quot;: {
+        &quot;trans_amount&quot;: 20,
+        &quot;time&quot;: &quot;Tue,  4 Aug 2020 12:39:55 GMT&quot;,
+        &quot;time_taken&quot;: &quot;11.9689ms&quot;
+      },
+      &quot;response&quot;: null
+    },
+    {
+      &quot;command&quot;: &quot;upload&quot;,
+      &quot;tx&quot;: &quot;1230c013-6076-4297-bfd0-4af08057d8d3&quot;,
+      &quot;code&quot;: 200,
+      &quot;host&quot;: &quot;hostname0&quot;,
+      &quot;result&quot;: &quot;succeeded&quot;,
+      &quot;reason&quot;: {
+        &quot;error&quot;: &quot;&quot;,
+        &quot;where&quot;: &quot;&quot;
+      },
+      &quot;cluster&quot;: {
+        &quot;cluster_name&quot;: &quot;replica-name1&quot;,
+        &quot;cluster_role&quot;: &quot;replica&quot;,
+        &quot;peers&quot;: &quot;hostname0,hostname1,hostname2,hostname3&quot;,
+        &quot;peers_count&quot;: 4,
+        &quot;lead_peer&quot;: &quot;hostname0&quot;,
+        &quot;child_peers&quot;: &quot;hostname1,hostname2&quot;
+      },
+      &quot;request&quot;: {
+        &quot;user&quot;: &quot;admin&quot;,
+        &quot;uri&quot;: &quot;/replica-name1/1.txt&quot;,
+        &quot;query&quot;: &quot;pretty&quot;,
+        &quot;srcuri&quot;: &quot;&quot;,
+        &quot;range&quot;: &quot;&quot;
+      },
+      &quot;stat&quot;: {
+        &quot;trans_amount&quot;: 20,
+        &quot;time&quot;: &quot;Tue,  4 Aug 2020 12:39:55 GMT&quot;,
+        &quot;time_taken&quot;: &quot;16.9555ms&quot;
+      },
+      &quot;response&quot;: null
+    }
+  ]
+}
+</code></pre>
+
+<hr />
               
             </div>
           </div>
