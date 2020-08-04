@@ -13,21 +13,20 @@
 !!! tip ""
     우리는 테스트를 위해 ***Chrome Talend API Test Tool***을 사용 할 것이며    
     동기화 요청에 사용한 HTTP Request와 동기화 요청 결과의 JSON만을 표시합니다.    
-    단 업로드 테스트만 테스트 방법을 설명드리고자 전체 화면 캡쳐로 진행합니다.
+    단 업로드 테스트만 테스트 방법을 설명드리고자 전체 화면 캡쳐를 제공합니다.
 
 ----
 
 ## 업로드 
 
-###### 업로드 전 peer volume 내용 확인
-
+##### 업로드 전 peer volume 내용 확인
 그림을 보시면 모든 `peer`의 `volume`은 파일이 없는 상태입니다.
 테스트 진행 전  `peer`의 `volume`을 확인하면서 진행 하시기 바랍니다.
 
 ![업로드전](../images/upload-001.png)
  
 
-###### 업로드 요청하기
+##### 업로드 요청하기
 20bytes 크기의 1.txt 파일을 업로드 하겠습니다.
 
 !!! tip ""
@@ -51,14 +50,13 @@ Content-Length: 20
 ![업로드 ](../images/upload-000.png)
 
 
-###### 업로드 결과
-
+##### 업로드 결과
 `peer`의 `volume`을 보시면 20bytes의 1.txt가 저장 되었습니다.
 
 ![업로드 결과 ](../images/upload-002.png)
 
 
-업로드 요청 결과는 아래 JSON과 같이 ***Chrome Talend API Test Tool***에서 확인이 가능합니다.
+업로드 요청 결과는 아래 JSON과 같이 ***Chrome Talend API Test Tool***에서 확인 가능합니다.
 ```
 {
   "tx": "1230c013-6076-4297-bfd0-4af08057d8d3",
