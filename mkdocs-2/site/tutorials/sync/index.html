@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>준비중... - HyperCluster</title>
+  <title>Synchronization API - HyperCluster</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\uc900\ube44\uc911...";
+    var mkdocs_page_name = "Synchronization API";
     var mkdocs_page_input_path = "tutorials\\sync.md";
     var mkdocs_page_url = null;
   </script>
@@ -101,7 +101,7 @@
     
       
     
-    <li>준비중...</li>
+    <li>Synchronization API</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -112,29 +112,28 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1">준비중...</h1>
-<p><strong><em>본 테스트는 API 사용 방법을 포함합니다.</em></strong></p>
-<p>본 테스트는 Tutorials의 <a href="../replica/">Setting up an Replica On Single-Host</a>의 구성을 사용합니다.
-<img alt="대체 텍스트" src="../../images/github.png" /></p>
+                <h1 id="synchronization-api">Synchronization API</h1>
+<p><strong><em>본 Tutorial은 API 사용 방법을 포함합니다.</em></strong></p>
+<p>본 Tutorial의 <strong>Cluster</strong>구성은 <a href="../replica/">Setting up an Replica On Single-Host</a>을 참고 바랍니다.
+  <img alt="대체 텍스트" src="../../images/github.png" /></p>
 <hr />
-<h2 id="_2">테스트 방법</h2>
+<h2 id="api">API 사용방법</h2>
 <div class="admonition tip">
-<p>우리는 테스트를 위해 <strong><em>Chrome Talend API Test Tool</em></strong>을 사용 할 것이며  <br />
-동기화 요청에 사용한 HTTP Request와 동기화 요청 결과의 JSON만을 표시합니다.  <br />
-단 업로드 테스트만 테스트 방법을 설명드리고자 전체 화면 캡쳐를 제공합니다.</p>
+<p>우리는 API 호출을 위해 <strong><em>Chrome Talend API Test Tool</em></strong>을 사용 할 것입니다.  <br />
+그리고 HTTP Request와 Request 결과 JSON만을 제공 할 것이고
+업로드 API 사용방법만 화면 캡쳐를 포함하여 제공합니다.</p>
 </div>
 <hr />
-<h2 id="_3">업로드</h2>
-<h5 id="peer-volume">업로드 전 peer volume 내용 확인</h5>
-<p>그림을 보시면 모든 <code>peer</code>의 <code>volume</code>은 파일이 없는 상태입니다.
-테스트 진행 전  <code>peer</code>의 <code>volume</code>을 확인하면서 진행 하시기 바랍니다.</p>
+<h2 id="_1">업로드</h2>
+<h5 id="peer-volume">업로드 전 peer volume 확인</h5>
+<p>그림을 보면 모든 <code>peer</code>의 <code>volume</code>은 파일이 없는 상태입니다.</p>
 <p><img alt="업로드전" src="../../images/upload-001.png" /></p>
-<h5 id="_4">업로드 요청하기</h5>
-<p>20bytes 크기의 1.txt 파일을 업로드 하겠습니다.</p>
+<h5 id="_2">업로드 요청하기</h5>
+<p>20bytes 크기의 1.txt 파일을 업로드 합니다.</p>
 <div class="admonition tip">
-<p>upload api</p>
+<p>UPLOAD API</p>
 </div>
-<pre><code>PUT /replica-name1/11.txt?pretty HTTP/1.1
+<pre><code>PUT /replica-name1/1.txt?pretty HTTP/1.1
 Host: 127.0.0.1:8080
 Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -148,8 +147,13 @@ Content-Length: 20
 uri query에 pretty를 추가 하시면 가독성이 좋은 JSON으로 응답을 받을 수 있습니다.</p>
 </div>
 <p><img alt="업로드 " src="../../images/upload-000.png" /></p>
-<h5 id="_5">업로드 결과</h5>
-<p><code>peer</code>의 <code>volume</code>을 보시면 20bytes의 1.txt가 저장 되었습니다.</p>
+<div class="admonition danger">
+<p><strong><em>Chrome Talend API Test Tool</em></strong>를 이용한 파일 업로드 방법은 아래 그림과 같이    <br />
+좌측 영역 HEADERS에서 <code>Content-Length</code>를 삭제하고 우측 BODY영역에서 File을 선택하면 파일 업로드가 가능합니다.     </p>
+</div>
+<p><img alt="업로드 " src="../../images/upload-004.png" /></p>
+<h5 id="_3">업로드 결과</h5>
+<p><code>peer</code>의 <code>volume</code>에서 20bytes의 1.txt를 확인합니다.</p>
 <p><img alt="업로드 결과 " src="../../images/upload-002.png" /></p>
 <p>업로드 요청 결과는 아래 JSON과 같이 <strong><em>Chrome Talend API Test Tool</em></strong>에서 확인 가능합니다.</p>
 <pre><code>{
@@ -290,6 +294,57 @@ uri query에 pretty를 추가 하시면 가독성이 좋은 JSON으로 응답을
 }
 </code></pre>
 
+<div class="admonition tip">
+<p><strong><em>결과 필드 설명</em></strong>    </p>
+</div>
+<ul>
+<li>
+<p>요청 처리 결과 집계  <br />
+<code>tx</code>: transaction id  <br />
+<code>code</code>: http code  <br />
+<code>Succeeded</code>: 성공 수 <br />
+<code>Failed</code>: 실패 수    </p>
+</li>
+<li>
+<p>요청 처리 결과   <br />
+<code>results[].command</code>: request 명령  <br />
+<code>results[].tx</code>: transaction id   <br />
+<code>results[].code</code>: http code  <br />
+<code>results[].host</code>: peer의 hostname  <br />
+<code>results[].result</code>: request 명령 처리 결과   <br />
+<code>results[].reason.error</code>: request 명령 처리 결과 실패 원인  <br />
+<code>results[].reason.where</code>: request 명령 처리 결과 실패 위치    </p>
+</li>
+<li>
+<p>cluster 정보  <br />
+<code>results[].cluster.cluster_name</code>: named-cluster  <br />
+<code>results[].cluster.cluster_role</code>: cluster 역할  <br />
+<code>results[].cluster.peers</code>: cluster에 참여한 peer  <br />
+<code>results[].cluster.peers_count</code>: cluster에 참여한 peer 수   <br />
+<code>results[].cluster.lead_peer</code>: lead peer  <br />
+<code>results[].cluster.child_peers</code>: child peer    </p>
+</li>
+<li>
+<p>request 정보  <br />
+<code>results[].request.user</code>: 사용자  <br />
+<code>results[].request.uri</code>: uri 정보  <br />
+<code>results[].request.query</code>: uri query 정보  <br />
+<code>results[].request.srcuri</code>: 요청한 http header의 source uri 정보  <br />
+<code>results[].request.range</code>: 요청한 http header의 range 정보    </p>
+</li>
+<li>
+<p>통계  <br />
+<code>results[].stat.trans_amount</code>: 전송량  <br />
+<code>results[].stat.time</code>: 요청 처리 시작 시간  <br />
+<code>results[].stat.time_taken</code>: 요청 처리에 걸린 시간    </p>
+</li>
+<li>
+<p>추가 정보  <br />
+<code>results[].response</code>: request 처리 결과의 추가 정보     </p>
+</li>
+</ul>
+<hr />
+<h2 id="_4">디렉토리 만들기</h2>
 <hr />
               
             </div>

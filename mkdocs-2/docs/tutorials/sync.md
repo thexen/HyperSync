@@ -1,39 +1,37 @@
 
-# 준비중...
+# Synchronization API
 
-   ***본 테스트는 API 사용 방법을 포함합니다.***
+   ***본 Tutorial은 API 사용 방법을 포함합니다.***
 
-   본 테스트는 Tutorials의 [Setting up an Replica On Single-Host](replica.md)의 구성을 사용합니다.
-![대체 텍스트](../images/github.png)
+  본 Tutorial의 **Cluster**구성은 [Setting up an Replica On Single-Host](replica.md)을 참고 바랍니다.
+  ![대체 텍스트](../images/github.png)
 
 ----
 
-## 테스트 방법
+## API 사용방법
 
 !!! tip ""
-    우리는 테스트를 위해 ***Chrome Talend API Test Tool***을 사용 할 것이며    
-    동기화 요청에 사용한 HTTP Request와 동기화 요청 결과의 JSON만을 표시합니다.    
-    단 업로드 테스트만 테스트 방법을 설명드리고자 전체 화면 캡쳐를 제공합니다.
+    우리는 API 호출을 위해 ***Chrome Talend API Test Tool***을 사용 할 것입니다.    
+    그리고 HTTP Request와 Request 결과 JSON만을 제공 할 것이고
+    업로드 API 사용방법만 화면 캡쳐를 포함하여 제공합니다.
 
 ----
 
-## 업로드 
+## 업로드
 
-##### 업로드 전 peer volume 내용 확인
-그림을 보시면 모든 `peer`의 `volume`은 파일이 없는 상태입니다.
-테스트 진행 전  `peer`의 `volume`을 확인하면서 진행 하시기 바랍니다.
+##### 업로드 전 peer volume 확인
+그림을 보면 모든 `peer`의 `volume`은 파일이 없는 상태입니다.
 
 ![업로드전](../images/upload-001.png)
  
-
 ##### 업로드 요청하기
-20bytes 크기의 1.txt 파일을 업로드 하겠습니다.
+20bytes 크기의 1.txt 파일을 업로드 합니다.
 
 !!! tip ""
-    upload api
+    UPLOAD API
 
 ```
-PUT /replica-name1/11.txt?pretty HTTP/1.1
+PUT /replica-name1/1.txt?pretty HTTP/1.1
 Host: 127.0.0.1:8080
 Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -50,8 +48,14 @@ Content-Length: 20
 ![업로드 ](../images/upload-000.png)
 
 
+!!! danger ""
+    ***Chrome Talend API Test Tool***를 이용한 파일 업로드 방법은 아래 그림과 같이      
+    좌측 영역 HEADERS에서 `Content-Length`를 삭제하고 우측 BODY영역에서 File을 선택하면 파일 업로드가 가능합니다.     
+    
+![업로드 ](../images/upload-004.png)
+
 ##### 업로드 결과
-`peer`의 `volume`을 보시면 20bytes의 1.txt가 저장 되었습니다.
+`peer`의 `volume`에서 20bytes의 1.txt를 확인합니다.
 
 ![업로드 결과 ](../images/upload-002.png)
 
@@ -196,5 +200,49 @@ Content-Length: 20
 }
 ```
 
+!!! tip ""
+    ***결과 필드 설명***    
+
+* 요청 처리 결과 집계    
+`tx`: transaction id    
+`code`: http code    
+`Succeeded`: 성공 수   
+`Failed`: 실패 수    
+
+* 요청 처리 결과     
+`results[].command`: request 명령    
+`results[].tx`: transaction id     
+`results[].code`: http code    
+`results[].host`: peer의 hostname    
+`results[].result`: request 명령 처리 결과     
+`results[].reason.error`: request 명령 처리 결과 실패 원인    
+`results[].reason.where`: request 명령 처리 결과 실패 위치    
+
+* cluster 정보    
+`results[].cluster.cluster_name`: named-cluster    
+`results[].cluster.cluster_role`: cluster 역할    
+`results[].cluster.peers`: cluster에 참여한 peer    
+`results[].cluster.peers_count`: cluster에 참여한 peer 수     
+`results[].cluster.lead_peer`: lead peer    
+`results[].cluster.child_peers`: child peer    
+
+* request 정보    
+`results[].request.user`: 사용자    
+`results[].request.uri`: uri 정보    
+`results[].request.query`: uri query 정보    
+`results[].request.srcuri`: 요청한 http header의 source uri 정보    
+`results[].request.range`: 요청한 http header의 range 정보    
+
+* 통계    
+`results[].stat.trans_amount`: 전송량    
+`results[].stat.time`: 요청 처리 시작 시간    
+`results[].stat.time_taken`: 요청 처리에 걸린 시간    
+
+* 추가 정보    
+`results[].response`: request 처리 결과의 추가 정보     
+
 ----
 
+## 디렉토리 만들기
+
+----

@@ -8,5 +8,5 @@
 
 ## How to use API
 
-* [Synchronization](sync.md)
+* [Synchronization API](sync.md)
 
