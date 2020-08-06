@@ -4,7 +4,7 @@
    ***본 Tutorial은 API 사용 방법을 포함합니다.***
 
   본 Tutorial의 **Cluster**구성은 [Setting up an Replica On Single-Host](replica.md)을 참고 바랍니다.
-  ![대체 텍스트](../images/github.png)
+  
 
 ----
 
@@ -24,11 +24,11 @@
 
 ![업로드전](../images/upload-001.png)
  
-##### 업로드 요청하기
+##### 업로드 요청
 20bytes 크기의 1.txt 파일을 업로드 합니다.
 
 !!! tip ""
-    UPLOAD API
+    Upload API
 
 ```
 PUT /replica-name1/1.txt?pretty HTTP/1.1
@@ -243,6 +243,748 @@ Content-Length: 20
 
 ----
 
-## 디렉토리 만들기
+## 폴더 만들기
+
+##### 폴더 만들기 요청
+
+**새 폴더**를 만들겠습니다.    
+요청 한 `uri`가 Directory라고 `peer`가 인식하기 위해서는 `uri`의 마지막은 `/`으로 끝나야 합니다.
+`/`으로 끝나지 않으면 파일로 생성됩니다.
+
+!!! tip ""
+    Create Directory API
+
+```
+PUT /replica-name1/새 폴더/?pretty HTTP/1.1
+Host: 127.0.0.1:8080
+Connection: Close
+Authorization: Basic YWRtaW46YWRtaW4=
+```
+
+##### 폴더 만들기 결과
+
+```
+{
+  "tx": "656e5d1b-be3a-4341-b7ab-d04fedd836b3",
+  "code": 200,
+  "Succeeded": 4,
+  "Failed": 0,
+  "results": [
+    {
+      "command": "mkdir",
+      "tx": "656e5d1b-be3a-4341-b7ab-d04fedd836b3",
+      "code": 200,
+      "host": "hostname2",
+      "result": "succeeded",
+      "reason": {
+        "error": "",
+        "where": ""
+      },
+      "cluster": {
+        "cluster_name": "replica-name1",
+        "cluster_role": "replica",
+        "peers": "hostname0,hostname1,hostname2,hostname3",
+        "peers_count": 4,
+        "lead_peer": "hostname0",
+        "child_peers": ""
+      },
+      "request": {
+        "user": "admin",
+        "uri": "/replica-name1/새 폴더/",
+        "query": "pretty",
+        "srcuri": "",
+        "range": ""
+      },
+      "stat": {
+        "trans_amount": 0,
+        "time": "Thu,  6 Aug 2020 14:18:52 GMT",
+        "time_taken": "995.3µs"
+      },
+      "response": null
+    },
+    {
+      "command": "mkdir",
+      "tx": "656e5d1b-be3a-4341-b7ab-d04fedd836b3",
+      "code": 200,
+      "host": "hostname3",
+      "result": "succeeded",
+      "reason": {
+        "error": "",
+        "where": ""
+      },
+      "cluster": {
+        "cluster_name": "replica-name1",
+        "cluster_role": "replica",
+        "peers": "hostname0,hostname1,hostname2,hostname3",
+        "peers_count": 4,
+        "lead_peer": "hostname0",
+        "child_peers": ""
+      },
+      "request": {
+        "user": "admin",
+        "uri": "/replica-name1/새 폴더/",
+        "query": "pretty",
+        "srcuri": "",
+        "range": ""
+      },
+      "stat": {
+        "trans_amount": 0,
+        "time": "Thu,  6 Aug 2020 14:18:52 GMT",
+        "time_taken": "1.9938ms"
+      },
+      "response": null
+    },
+    {
+      "command": "mkdir",
+      "tx": "656e5d1b-be3a-4341-b7ab-d04fedd836b3",
+      "code": 200,
+      "host": "hostname1",
+      "result": "succeeded",
+      "reason": {
+        "error": "",
+        "where": ""
+      },
+      "cluster": {
+        "cluster_name": "replica-name1",
+        "cluster_role": "replica",
+        "peers": "hostname0,hostname1,hostname2,hostname3",
+        "peers_count": 4,
+        "lead_peer": "hostname0",
+        "child_peers": ""
+      },
+      "request": {
+        "user": "admin",
+        "uri": "/replica-name1/새 폴더/",
+        "query": "pretty",
+        "srcuri": "",
+        "range": ""
+      },
+      "stat": {
+        "trans_amount": 0,
+        "time": "Thu,  6 Aug 2020 14:18:52 GMT",
+        "time_taken": "1.9938ms"
+      },
+      "response": null
+    },
+    {
+      "command": "mkdir",
+      "tx": "656e5d1b-be3a-4341-b7ab-d04fedd836b3",
+      "code": 200,
+      "host": "hostname0",
+      "result": "succeeded",
+      "reason": {
+        "error": "",
+        "where": ""
+      },
+      "cluster": {
+        "cluster_name": "replica-name1",
+        "cluster_role": "replica",
+        "peers": "hostname0,hostname1,hostname2,hostname3",
+        "peers_count": 4,
+        "lead_peer": "hostname0",
+        "child_peers": "hostname1,hostname2,hostname3"
+      },
+      "request": {
+        "user": "admin",
+        "uri": "/replica-name1/새 폴더/",
+        "query": "pretty",
+        "srcuri": "",
+        "range": ""
+      },
+      "stat": {
+        "trans_amount": 0,
+        "time": "Thu,  6 Aug 2020 14:18:52 GMT",
+        "time_taken": "6.9818ms"
+      },
+      "response": null
+    }
+  ]
+}
+```
+----
+
+## 복사하기
+
+##### 복사하기 요청
+
+**/1.txt** 파일을 **/새 폴더/1.txt**로 복사합니다.
+
+!!! tip ""
+    Copy API
+
+```
+PUT /replica-name1/새 폴더/1.txt?pretty HTTP/1.1
+Host: 127.0.0.1:8080
+Connection: Close
+Authorization: Basic YWRtaW46YWRtaW4=
+X-Hyper-Copy-Source: /replica-name1/1.txt
+```
+
+##### 복사하기 결과
+
+```
+{
+  "tx": "9a855db3-bddd-47d7-aab0-302bc64a48dc",
+  "code": 200,
+  "Succeeded": 4,
+  "Failed": 0,
+  "results": [
+    {
+      "command": "copy",
+      "tx": "9a855db3-bddd-47d7-aab0-302bc64a48dc",
+      "code": 200,
+      "host": "hostname1",
+      "result": "succeeded",
+      "reason": {
+        "error": "",
+        "where": ""
+      },
+      "cluster": {
+        "cluster_name": "replica-name1",
+        "cluster_role": "replica",
+        "peers": "hostname0,hostname1,hostname2,hostname3",
+        "peers_count": 4,
+        "lead_peer": "hostname0",
+        "child_peers": ""
+      },
+      "request": {
+        "user": "admin",
+        "uri": "/replica-name1/새 폴더/1.txt",
+        "query": "pretty",
+        "srcuri": "/replica-name1/1.txt",
+        "range": ""
+      },
+      "stat": {
+        "trans_amount": 0,
+        "time": "Thu,  6 Aug 2020 14:37:34 GMT",
+        "time_taken": "125.2044ms"
+      },
+      "response": null
+    },
+    {
+      "command": "copy",
+      "tx": "9a855db3-bddd-47d7-aab0-302bc64a48dc",
+      "code": 200,
+      "host": "hostname3",
+      "result": "succeeded",
+      "reason": {
+        "error": "",
+        "where": ""
+      },
+      "cluster": {
+        "cluster_name": "replica-name1",
+        "cluster_role": "replica",
+        "peers": "hostname0,hostname1,hostname2,hostname3",
+        "peers_count": 4,
+        "lead_peer": "hostname0",
+        "child_peers": ""
+      },
+      "request": {
+        "user": "admin",
+        "uri": "/replica-name1/새 폴더/1.txt",
+        "query": "pretty",
+        "srcuri": "/replica-name1/1.txt",
+        "range": ""
+      },
+      "stat": {
+        "trans_amount": 0,
+        "time": "Thu,  6 Aug 2020 14:37:34 GMT",
+        "time_taken": "125.2066ms"
+      },
+      "response": null
+    },
+    {
+      "command": "copy",
+      "tx": "9a855db3-bddd-47d7-aab0-302bc64a48dc",
+      "code": 200,
+      "host": "hostname2",
+      "result": "succeeded",
+      "reason": {
+        "error": "",
+        "where": ""
+      },
+      "cluster": {
+        "cluster_name": "replica-name1",
+        "cluster_role": "replica",
+        "peers": "hostname0,hostname1,hostname2,hostname3",
+        "peers_count": 4,
+        "lead_peer": "hostname0",
+        "child_peers": ""
+      },
+      "request": {
+        "user": "admin",
+        "uri": "/replica-name1/새 폴더/1.txt",
+        "query": "pretty",
+        "srcuri": "/replica-name1/1.txt",
+        "range": ""
+      },
+      "stat": {
+        "trans_amount": 0,
+        "time": "Thu,  6 Aug 2020 14:37:34 GMT",
+        "time_taken": "151.8515ms"
+      },
+      "response": null
+    },
+    {
+      "command": "copy",
+      "tx": "9a855db3-bddd-47d7-aab0-302bc64a48dc",
+      "code": 200,
+      "host": "hostname0",
+      "result": "succeeded",
+      "reason": {
+        "error": "",
+        "where": ""
+      },
+      "cluster": {
+        "cluster_name": "replica-name1",
+        "cluster_role": "replica",
+        "peers": "hostname0,hostname1,hostname2,hostname3",
+        "peers_count": 4,
+        "lead_peer": "hostname0",
+        "child_peers": "hostname1,hostname2,hostname3"
+      },
+      "request": {
+        "user": "admin",
+        "uri": "/replica-name1/새 폴더/1.txt",
+        "query": "pretty",
+        "srcuri": "/replica-name1/1.txt",
+        "range": ""
+      },
+      "stat": {
+        "trans_amount": 0,
+        "time": "Thu,  6 Aug 2020 14:37:34 GMT",
+        "time_taken": "154.8079ms"
+      },
+      "response": null
+    }
+  ]
+}
+```
+
+----
+
+## 이름 바꾸기
+
+##### 이름 바꾸기 요청
+
+**/새 폴더/1.txt**를 **/2.txt**로 폴더 이동과 이름 바꾸기를 하겠습니다.
+그리고 지금 부터`perrty query`를 생략 하겠습니다.
+
+!!! tip ""
+    Rename API
+
+```
+PUT /replica-name1/2.txt HTTP/1.1
+Host: 127.0.0.1:8080
+Connection: Close
+Authorization: Basic YWRtaW46YWRtaW4=
+X-Hyper-Rename-Source: /replica-name1/%EC%83%88%20%ED%8F%B4%EB%8D%94/1.txt
+```
+
+##### 이름 바꾸기 결과
+
+```
+{"tx":"0010e66f-00dd-437d-bafe-ba4c3912fc89","code":200,"Succeeded":4,"Failed":0,"results":[{"command":"rename","tx":"0010e66f-00dd-437d-bafe-ba4c3912fc89","code":200,"host":"hostname1","result":"succeeded","reason":{"error":"","where":""},"cluster":{"cluster_name":"replica-name1","cluster_role":"replica","peers":"hostname0,hostname1,hostname2,hostname3","peers_count":4,"lead_peer":"hostname0","child_peers":""},"request":{"user":"admin","uri":"/replica-name1/2.txt","query":"","srcuri":"/replica-name1/새 폴더/1.txt","range":""},"stat":{"trans_amount":0,"time":"Thu,  6 Aug 2020 15:08:54 GMT","time_taken":"996µs"},"response":null},{"command":"rename","tx":"0010e66f-00dd-437d-bafe-ba4c3912fc89","code":200,"host":"hostname2","result":"succeeded","reason":{"error":"","where":""},"cluster":{"cluster_name":"replica-name1","cluster_role":"replica","peers":"hostname0,hostname1,hostname2,hostname3","peers_count":4,"lead_peer":"hostname0","child_peers":""},"request":{"user":"admin","uri":"/replica-name1/2.txt","query":"","srcuri":"/replica-name1/새 폴더/1.txt","range":""},"stat":{"trans_amount":0,"time":"Thu,  6 Aug 2020 15:08:54 GMT","time_taken":"0s"},"response":null},{"command":"rename","tx":"0010e66f-00dd-437d-bafe-ba4c3912fc89","code":200,"host":"hostname3","result":"succeeded","reason":{"error":"","where":""},"cluster":{"cluster_name":"replica-name1","cluster_role":"replica","peers":"hostname0,hostname1,hostname2,hostname3","peers_count":4,"lead_peer":"hostname0","child_peers":""},"request":{"user":"admin","uri":"/replica-name1/2.txt","query":"","srcuri":"/replica-name1/새 폴더/1.txt","range":""},"stat":{"trans_amount":0,"time":"Thu,  6 Aug 2020 15:08:54 GMT","time_taken":"997.8µs"},"response":null},{"command":"rename","tx":"0010e66f-00dd-437d-bafe-ba4c3912fc89","code":200,"host":"hostname0","result":"succeeded","reason":{"error":"","where":""},"cluster":{"cluster_name":"replica-name1","cluster_role":"replica","peers":"hostname0,hostname1,hostname2,hostname3","peers_count":4,"lead_peer":"hostname0","child_peers":"hostname1,hostname2,hostname3"},"request":{"user":"admin","uri":"/replica-name1/2.txt","query":"","srcuri":"/replica-name1/새 폴더/1.txt","range":""},"stat":{"trans_amount":0,"time":"Thu,  6 Aug 2020 15:08:54 GMT","time_taken":"1.9938ms"},"response":null}]}
+```
+
+----
+
+## 파일 수정 시간 변경 
+
+##### 파일 수정 시간 변경 요청
+
+**/1.txt**파일의 수정 시간을 **2020/08/02 16:28:00** 으로 변경 하겠습니다.
+
+!!! tip ""
+    Change Modified Time API
+
+```
+PUT /replica-name1/1.txt HTTP/1.1
+Host: 127.0.0.1:8080
+Connection: Close
+Authorization: Basic YWRtaW46YWRtaW4=
+X-Hyper-Set-Filetime: Sun, 02 Aug 2020 07:28:00 GMT
+```
+
+##### 파일 수정 시간 변경 결과
+
+```
+{"tx":"38006e96-5705-4e2b-b2e5-686a81abf361","code":200,"Succeeded":4,"Failed":0,"results":[{"command":"setfiletime","tx":"38006e96-5705-4e2b-b2e5-686a81abf361","code":200,"host":"hostname1","result":"succeeded","reason":{"error":"","where":""},"cluster":{"cluster_name":"replica-name1","cluster_role":"replica","peers":"hostname0,hostname1,hostname2,hostname3","peers_count":4,"lead_peer":"hostname0","child_peers":""},"request":{"user":"admin","uri":"/replica-name1/1.txt","query":"","srcuri":"","range":""},"stat":{"trans_amount":0,"time":"Thu,  6 Aug 2020 15:17:32 GMT","time_taken":"997.4µs"},"response":null},{"command":"setfiletime","tx":"38006e96-5705-4e2b-b2e5-686a81abf361","code":200,"host":"hostname2","result":"succeeded","reason":{"error":"","where":""},"cluster":{"cluster_name":"replica-name1","cluster_role":"replica","peers":"hostname0,hostname1,hostname2,hostname3","peers_count":4,"lead_peer":"hostname0","child_peers":""},"request":{"user":"admin","uri":"/replica-name1/1.txt","query":"","srcuri":"","range":""},"stat":{"trans_amount":0,"time":"Thu,  6 Aug 2020 15:17:32 GMT","time_taken":"998.1µs"},"response":null},{"command":"setfiletime","tx":"38006e96-5705-4e2b-b2e5-686a81abf361","code":200,"host":"hostname3","result":"succeeded","reason":{"error":"","where":""},"cluster":{"cluster_name":"replica-name1","cluster_role":"replica","peers":"hostname0,hostname1,hostname2,hostname3","peers_count":4,"lead_peer":"hostname0","child_peers":""},"request":{"user":"admin","uri":"/replica-name1/1.txt","query":"","srcuri":"","range":""},"stat":{"trans_amount":0,"time":"Thu,  6 Aug 2020 15:17:32 GMT","time_taken":"998.1µs"},"response":null},{"command":"setfiletime","tx":"38006e96-5705-4e2b-b2e5-686a81abf361","code":200,"host":"hostname0","result":"succeeded","reason":{"error":"","where":""},"cluster":{"cluster_name":"replica-name1","cluster_role":"replica","peers":"hostname0,hostname1,hostname2,hostname3","peers_count":4,"lead_peer":"hostname0","child_peers":"hostname1,hostname2,hostname3"},"request":{"user":"admin","uri":"/replica-name1/1.txt","query":"","srcuri":"","range":""},"stat":{"trans_amount":0,"time":"Thu,  6 Aug 2020 15:17:32 GMT","time_taken":"1.9955ms"},"response":null}]}
+```
+
+----
+
+## 삭제 하기
+
+##### 삭제 요청
+
+**/2.txt**파일을 삭제 하겠습니다
+
+!!! tip ""
+    Delete API
+
+```
+DELETE /replica-name1/2.txt HTTP/1.1
+Host: 127.0.0.1:8080
+Connection: Close
+Authorization: Basic YWRtaW46YWRtaW4=
+```
+
+##### 삭제 결과
+
+```
+{"tx":"a9c82470-42fe-4747-9d95-1ee0609ac3c7","code":200,"Succeeded":4,"Failed":0,"results":[{"command":"remove","tx":"a9c82470-42fe-4747-9d95-1ee0609ac3c7","code":200,"host":"hostname1","result":"succeeded","reason":{"error":"","where":""},"cluster":{"cluster_name":"replica-name1","cluster_role":"replica","peers":"hostname0,hostname1,hostname2,hostname3","peers_count":4,"lead_peer":"hostname0","child_peers":""},"request":{"user":"admin","uri":"/replica-name1/2.txt","query":"","srcuri":"","range":""},"stat":{"trans_amount":0,"time":"Thu,  6 Aug 2020 15:23:05 GMT","time_taken":"0s"},"response":null},{"command":"remove","tx":"a9c82470-42fe-4747-9d95-1ee0609ac3c7","code":200,"host":"hostname2","result":"succeeded","reason":{"error":"","where":""},"cluster":{"cluster_name":"replica-name1","cluster_role":"replica","peers":"hostname0,hostname1,hostname2,hostname3","peers_count":4,"lead_peer":"hostname0","child_peers":""},"request":{"user":"admin","uri":"/replica-name1/2.txt","query":"","srcuri":"","range":""},"stat":{"trans_amount":0,"time":"Thu,  6 Aug 2020 15:23:05 GMT","time_taken":"999.4µs"},"response":null},{"command":"remove","tx":"a9c82470-42fe-4747-9d95-1ee0609ac3c7","code":200,"host":"hostname3","result":"succeeded","reason":{"error":"","where":""},"cluster":{"cluster_name":"replica-name1","cluster_role":"replica","peers":"hostname0,hostname1,hostname2,hostname3","peers_count":4,"lead_peer":"hostname0","child_peers":""},"request":{"user":"admin","uri":"/replica-name1/2.txt","query":"","srcuri":"","range":""},"stat":{"trans_amount":0,"time":"Thu,  6 Aug 2020 15:23:05 GMT","time_taken":"999.4µs"},"response":null},{"command":"remove","tx":"a9c82470-42fe-4747-9d95-1ee0609ac3c7","code":200,"host":"hostname0","result":"succeeded","reason":{"error":"","where":""},"cluster":{"cluster_name":"replica-name1","cluster_role":"replica","peers":"hostname0,hostname1,hostname2,hostname3","peers_count":4,"lead_peer":"hostname0","child_peers":"hostname1,hostname2,hostname3"},"request":{"user":"admin","uri":"/replica-name1/2.txt","query":"","srcuri":"","range":""},"stat":{"trans_amount":0,"time":"Thu,  6 Aug 2020 15:23:05 GMT","time_taken":"2.9919ms"},"response":null}]}
+```
+
+----
+
+## 검색 하기
+
+##### 검색 요청
+
+`cluster`에 참여한 모든 `peer`에서 **/1.txt**파일을 검색하고 정보를 보여 줍니다.
+
+!!! tip ""
+    Find API
+
+```
+FIND /replica-name1/1.txt?pretty HTTP/1.1
+Host: 127.0.0.1:8080
+Connection: Close
+Authorization: Basic YWRtaW46YWRtaW4=
+```
+
+##### 검색 결과
+
+```
+{
+  "tx": "2c1b860f-52a3-4656-a914-5b91fe6cd371",
+  "code": 200,
+  "Succeeded": 4,
+  "Failed": 0,
+  "results": [
+    {
+      "command": "find",
+      "tx": "2c1b860f-52a3-4656-a914-5b91fe6cd371",
+      "code": 200,
+      "host": "hostname1",
+      "result": "succeeded",
+      "reason": {
+        "error": "",
+        "where": ""
+      },
+      "cluster": {
+        "cluster_name": "replica-name1",
+        "cluster_role": "replica",
+        "peers": "hostname0,hostname1,hostname2,hostname3",
+        "peers_count": 4,
+        "lead_peer": "hostname0",
+        "child_peers": ""
+      },
+      "request": {
+        "user": "admin",
+        "uri": "/replica-name1/1.txt",
+        "query": "pretty",
+        "srcuri": "",
+        "range": ""
+      },
+      "stat": {
+        "trans_amount": 0,
+        "time": "Thu,  6 Aug 2020 15:28:57 GMT",
+        "time_taken": "0s"
+      },
+      "response": {
+        "attr": "file",
+        "directorycnt": 0,
+        "filecnt": 0,
+        "filesize": 20,
+        "found": true,
+        "hash": "c971acdb2e5180618d6fab0ac05255a26bd992444cec7e99db0338333d2170ea",
+        "modified": "Sun,  2 Aug 2020 07:28:00 GMT"
+      }
+    },
+    {
+      "command": "find",
+      "tx": "2c1b860f-52a3-4656-a914-5b91fe6cd371",
+      "code": 200,
+      "host": "hostname2",
+      "result": "succeeded",
+      "reason": {
+        "error": "",
+        "where": ""
+      },
+      "cluster": {
+        "cluster_name": "replica-name1",
+        "cluster_role": "replica",
+        "peers": "hostname0,hostname1,hostname2,hostname3",
+        "peers_count": 4,
+        "lead_peer": "hostname0",
+        "child_peers": ""
+      },
+      "request": {
+        "user": "admin",
+        "uri": "/replica-name1/1.txt",
+        "query": "pretty",
+        "srcuri": "",
+        "range": ""
+      },
+      "stat": {
+        "trans_amount": 0,
+        "time": "Thu,  6 Aug 2020 15:28:57 GMT",
+        "time_taken": "998.1µs"
+      },
+      "response": {
+        "attr": "file",
+        "directorycnt": 0,
+        "filecnt": 0,
+        "filesize": 20,
+        "found": true,
+        "hash": "c971acdb2e5180618d6fab0ac05255a26bd992444cec7e99db0338333d2170ea",
+        "modified": "Sun,  2 Aug 2020 07:28:00 GMT"
+      }
+    },
+    {
+      "command": "find",
+      "tx": "2c1b860f-52a3-4656-a914-5b91fe6cd371",
+      "code": 200,
+      "host": "hostname3",
+      "result": "succeeded",
+      "reason": {
+        "error": "",
+        "where": ""
+      },
+      "cluster": {
+        "cluster_name": "replica-name1",
+        "cluster_role": "replica",
+        "peers": "hostname0,hostname1,hostname2,hostname3",
+        "peers_count": 4,
+        "lead_peer": "hostname0",
+        "child_peers": ""
+      },
+      "request": {
+        "user": "admin",
+        "uri": "/replica-name1/1.txt",
+        "query": "pretty",
+        "srcuri": "",
+        "range": ""
+      },
+      "stat": {
+        "trans_amount": 0,
+        "time": "Thu,  6 Aug 2020 15:28:57 GMT",
+        "time_taken": "998.1µs"
+      },
+      "response": {
+        "attr": "file",
+        "directorycnt": 0,
+        "filecnt": 0,
+        "filesize": 20,
+        "found": true,
+        "hash": "c971acdb2e5180618d6fab0ac05255a26bd992444cec7e99db0338333d2170ea",
+        "modified": "Sun,  2 Aug 2020 07:28:00 GMT"
+      }
+    },
+    {
+      "command": "find",
+      "tx": "2c1b860f-52a3-4656-a914-5b91fe6cd371",
+      "code": 200,
+      "host": "hostname0",
+      "result": "succeeded",
+      "reason": {
+        "error": "",
+        "where": ""
+      },
+      "cluster": {
+        "cluster_name": "replica-name1",
+        "cluster_role": "replica",
+        "peers": "hostname0,hostname1,hostname2,hostname3",
+        "peers_count": 4,
+        "lead_peer": "hostname0",
+        "child_peers": "hostname1,hostname2,hostname3"
+      },
+      "request": {
+        "user": "admin",
+        "uri": "/replica-name1/1.txt",
+        "query": "pretty",
+        "srcuri": "",
+        "range": ""
+      },
+      "stat": {
+        "trans_amount": 0,
+        "time": "Thu,  6 Aug 2020 15:28:57 GMT",
+        "time_taken": "2.993ms"
+      },
+      "response": {
+        "found": true,
+        "attr": "file",
+        "modified": "Sun,  2 Aug 2020 07:28:00 GMT",
+        "filesize": 1123,
+        "filecnt": 0,
+        "directorycnt": 0,
+        "hash": "c971acdb2e5180618d6fab0ac05255a26bd992444cec7e99db0338333d2170ea"
+      }
+    }
+  ]
+}
+```
+
+----
+
+## PUSH 하기
+
+##### Push 요청
+
+`push`동작 시연을 위해 `peer` **hostname0**의 `/`에 임의의 파일을 복사합니다.   
+전 **server001.png** 파일을 복사하였습니다. 그리고 **server001.png**파일을 모든 `peer`에게 `push`를 하겠습니다.
+
+!!! tip ""
+    Sync API
+
+```
+SYNC /replica-name1/server001.png?pretty HTTP/1.1
+Host: test
+Connection: Close
+Authorization: Basic YWRtaW46YWRtaW4=
+```
+
+##### Push 결과
+
+```
+{
+  "tx": "8361e394-29ca-47bd-8713-7691ed404e9e",
+  "code": 200,
+  "Succeeded": 4,
+  "Failed": 0,
+  "results": [
+    {
+      "command": "sync",
+      "tx": "8361e394-29ca-47bd-8713-7691ed404e9e",
+      "code": 200,
+      "host": "hostname2",
+      "result": "succeeded",
+      "reason": {
+        "error": "",
+        "where": ""
+      },
+      "cluster": {
+        "cluster_name": "replica-name1",
+        "cluster_role": "replica",
+        "peers": "hostname0,hostname1,hostname2,hostname3",
+        "peers_count": 4,
+        "lead_peer": "hostname0",
+        "child_peers": ""
+      },
+      "request": {
+        "user": "admin",
+        "uri": "/replica-name1/server001.png",
+        "query": "pretty",
+        "srcuri": "",
+        "range": ""
+      },
+      "stat": {
+        "trans_amount": 1123,
+        "time": "Thu,  6 Aug 2020 15:41:34 GMT",
+        "time_taken": "1.9935ms"
+      },
+      "response": null
+    },
+    {
+      "command": "sync",
+      "tx": "8361e394-29ca-47bd-8713-7691ed404e9e",
+      "code": 200,
+      "host": "hostname3",
+      "result": "succeeded",
+      "reason": {
+        "error": "",
+        "where": ""
+      },
+      "cluster": {
+        "cluster_name": "replica-name1",
+        "cluster_role": "replica",
+        "peers": "hostname0,hostname1,hostname2,hostname3",
+        "peers_count": 4,
+        "lead_peer": "hostname0",
+        "child_peers": ""
+      },
+      "request": {
+        "user": "admin",
+        "uri": "/replica-name1/server001.png",
+        "query": "pretty",
+        "srcuri": "",
+        "range": ""
+      },
+      "stat": {
+        "trans_amount": 1123,
+        "time": "Thu,  6 Aug 2020 15:41:34 GMT",
+        "time_taken": "996.4µs"
+      },
+      "response": null
+    },
+    {
+      "command": "sync",
+      "tx": "8361e394-29ca-47bd-8713-7691ed404e9e",
+      "code": 200,
+      "host": "hostname1",
+      "result": "succeeded",
+      "reason": {
+        "error": "",
+        "where": ""
+      },
+      "cluster": {
+        "cluster_name": "replica-name1",
+        "cluster_role": "replica",
+        "peers": "hostname0,hostname1,hostname2,hostname3",
+        "peers_count": 4,
+        "lead_peer": "hostname0",
+        "child_peers": "hostname2,hostname3"
+      },
+      "request": {
+        "user": "admin",
+        "uri": "/replica-name1/server001.png",
+        "query": "pretty",
+        "srcuri": "",
+        "range": ""
+      },
+      "stat": {
+        "trans_amount": 1123,
+        "time": "Thu,  6 Aug 2020 15:41:34 GMT",
+        "time_taken": "3.9909ms"
+      },
+      "response": null
+    },
+    {
+      "command": "sync",
+      "tx": "8361e394-29ca-47bd-8713-7691ed404e9e",
+      "code": 200,
+      "host": "hostname0",
+      "result": "succeeded",
+      "reason": {
+        "error": "",
+        "where": ""
+      },
+      "cluster": {
+        "cluster_name": "replica-name1",
+        "cluster_role": "replica",
+        "peers": "hostname0,hostname1,hostname2,hostname3",
+        "peers_count": 4,
+        "lead_peer": "hostname0",
+        "child_peers": "hostname1"
+      },
+      "request": {
+        "user": "admin",
+        "uri": "/replica-name1/server001.png",
+        "query": "pretty",
+        "srcuri": "",
+        "range": ""
+      },
+      "stat": {
+        "trans_amount": 1123,
+        "time": "Thu,  6 Aug 2020 15:41:34 GMT",
+        "time_taken": "5.9838ms"
+      },
+      "response": null
+    }
+  ]
+}
+```
 
 ----
