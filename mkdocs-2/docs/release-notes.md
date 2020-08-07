@@ -13,9 +13,10 @@
             - ElasticSearch 연동
         - 누락되었거나 동기화가 되지 않은 파일 자동 동기화
     3. 탐색기
-    4. 시스템 모니터링 정보 수집
-    5. FUSE 연동
-    6. Dokan 연동
+    4. Cli
+    5. 시스템 모니터링 정보 수집
+    6. FUSE 연동
+    7. Dokan 연동
 
 ----
 ## Version 0.6.0.0
@@ -30,11 +31,7 @@
     * download
     * find
     * sync
-    * uri quri
-        * purge    
-        * pretty
         
-
 ----
 
 

@@ -3,7 +3,7 @@
 
    ***본 Tutorial은 API 사용 방법을 포함합니다.***
 
-  [[Setting up an Replica On Single-Host]](replica.md)에서 설명 하였던 **Cluster** 구성으로 Tutorial을 진행합니다.
+  [[Setting up an Replica On Single-Host]](replica.md)에서 설명 했던 **Cluster** 구성으로 Tutorial을 진행합니다.
   
 
 ----

@@ -8,6 +8,8 @@
 
 * ***HyperCluster Explorer***    
 
+* ***HyperCluster Cli***   
+
 * ***HyperCluster DMount***    
 
 * ***HyperCluster FMount***   
