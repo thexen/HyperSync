@@ -12,7 +12,7 @@
 HTTP Request Syntax를 사용하며
 
 ```
-METHOD URI HTTP/1.1
+METHOD URI?Query HTTP/1.1
 ```
 
 Request의 URI는 `cluster`섹션에 등록한 `named-cluster`가 포함하여야 합니다.
@@ -20,7 +20,7 @@ Request의 URI는 `cluster`섹션에 등록한 `named-cluster`가 포함하여�
 `named-cluster`는 대소문자를 구분하지만, `uri` 와 `source uri`는 대소문자 구분을 하지 않으며 `lower case` 처리 됩니다.
 
 ```
-METHOD /{named-cluster}/{URI} HTTP/1.1
+METHOD /{named-cluster}/{URI}?{Query} HTTP/1.1
 ```
 
 !!! note ""

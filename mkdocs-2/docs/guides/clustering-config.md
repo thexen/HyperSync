@@ -1,4 +1,4 @@
-# Configurations 
+# Clustering Configurations 
 
 ***클러스터링 환경 설정 안내서***
 

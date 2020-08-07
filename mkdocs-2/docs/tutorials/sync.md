@@ -3,7 +3,7 @@
 
    ***본 Tutorial은 API 사용 방법을 포함합니다.***
 
-  본 Tutorial의 **Cluster**구성은 [Setting up an Replica On Single-Host](replica.md)을 참고 바랍니다.
+  [[Setting up an Replica On Single-Host]](replica.md)에서 설명 하였던 **Cluster** 구성으로 Tutorial을 진행합니다.
   
 
 ----
@@ -31,7 +31,7 @@
     Upload API
 
 ```
-PUT /replica-name1/1.txt?pretty HTTP/1.1
+PUT /replica-name1/1.txt?pretty&cluster HTTP/1.1
 Host: 127.0.0.1:8080
 Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -46,7 +46,6 @@ Content-Length: 20
 
 
 ![업로드 ](../images/upload-000.png)
-
 
 !!! danger ""
     ***Chrome Talend API Test Tool***를 이용한 파일 업로드 방법은 아래 그림과 같이      
@@ -255,7 +254,7 @@ Content-Length: 20
     Create Directory API
 
 ```
-PUT /replica-name1/새 폴더/?pretty HTTP/1.1
+PUT /replica-name1/새 폴더/?pretty&cluster HTTP/1.1
 Host: 127.0.0.1:8080
 Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -413,7 +412,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
     Copy API
 
 ```
-PUT /replica-name1/새 폴더/1.txt?pretty HTTP/1.1
+PUT /replica-name1/새 폴더/1.txt?pretty&cluster HTTP/1.1
 Host: 127.0.0.1:8080
 Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -574,7 +573,7 @@ X-Hyper-Copy-Source: /replica-name1/1.txt
     Rename API
 
 ```
-PUT /replica-name1/2.txt HTTP/1.1
+PUT /replica-name1/2.txt?cluster HTTP/1.1
 Host: 127.0.0.1:8080
 Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -599,7 +598,7 @@ X-Hyper-Rename-Source: /replica-name1/%EC%83%88%20%ED%8F%B4%EB%8D%94/1.txt
     Change Modified Time API
 
 ```
-PUT /replica-name1/1.txt HTTP/1.1
+PUT /replica-name1/1.txt?cluster HTTP/1.1
 Host: 127.0.0.1:8080
 Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -624,7 +623,7 @@ X-Hyper-Set-Filetime: Sun, 02 Aug 2020 07:28:00 GMT
     Delete API
 
 ```
-DELETE /replica-name1/2.txt HTTP/1.1
+DELETE /replica-name1/2.txt?cluster HTTP/1.1
 Host: 127.0.0.1:8080
 Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -648,7 +647,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
     Find API
 
 ```
-FIND /replica-name1/1.txt?pretty HTTP/1.1
+FIND /replica-name1/1.txt?pretty&cluster HTTP/1.1
 Host: 127.0.0.1:8080
 Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -834,14 +833,14 @@ Authorization: Basic YWRtaW46YWRtaW4=
 ##### Push 요청
 
 `push`동작 시연을 위해 `peer` **hostname0**의 `/`에 임의의 파일을 복사합니다.   
-전 **server001.png** 파일을 복사하였습니다. 그리고 **server001.png**파일을 모든 `peer`에게 `push`를 하겠습니다.
+필자는 **server001.png** 파일을 복사하였습니다. 그리고 **server001.png**파일을 모든 `peer`에게 `push`합니다.
 
 !!! tip ""
     Sync API
 
 ```
-SYNC /replica-name1/server001.png?pretty HTTP/1.1
-Host: test
+SYNC /replica-name1/server001.png?pretty&cluster HTTP/1.1
+Host: 127.0.0.1:8080
 Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
 ```

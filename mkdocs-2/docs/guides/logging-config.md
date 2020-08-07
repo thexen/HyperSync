@@ -1,4 +1,4 @@
-# Configurations 
+# Logging Configurations 
 
 ***로깅 환경 설정 안내서***
 
