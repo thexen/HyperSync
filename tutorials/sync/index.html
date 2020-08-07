@@ -114,7 +114,7 @@
               
                 <h1 id="synchronization-api">Synchronization API</h1>
 <p><strong><em>본 Tutorial은 API 사용 방법을 포함합니다.</em></strong></p>
-<p>본 Tutorial의 <strong>Cluster</strong>구성은 <a href="../replica/">Setting up an Replica On Single-Host</a>을 참고 바랍니다.</p>
+<p><a href="../replica/">[Setting up an Replica On Single-Host]</a>에서 설명 하였던 <strong>Cluster</strong> 구성으로 Tutorial을 진행합니다.</p>
 <hr />
 <h2 id="api">API 사용방법</h2>
 <div class="admonition tip">
@@ -132,7 +132,7 @@
 <div class="admonition tip">
 <p>Upload API</p>
 </div>
-<pre><code>PUT /replica-name1/1.txt?pretty HTTP/1.1
+<pre><code>PUT /replica-name1/1.txt?pretty&amp;cluster HTTP/1.1
 Host: 127.0.0.1:8080
 Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -351,7 +351,7 @@ uri query에 pretty를 추가 하시면 가독성이 좋은 JSON으로 응답을
 <div class="admonition tip">
 <p>Create Directory API</p>
 </div>
-<pre><code>PUT /replica-name1/새 폴더/?pretty HTTP/1.1
+<pre><code>PUT /replica-name1/새 폴더/?pretty&amp;cluster HTTP/1.1
 Host: 127.0.0.1:8080
 Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -503,7 +503,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 <div class="admonition tip">
 <p>Copy API</p>
 </div>
-<pre><code>PUT /replica-name1/새 폴더/1.txt?pretty HTTP/1.1
+<pre><code>PUT /replica-name1/새 폴더/1.txt?pretty&amp;cluster HTTP/1.1
 Host: 127.0.0.1:8080
 Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -657,7 +657,7 @@ X-Hyper-Copy-Source: /replica-name1/1.txt
 <div class="admonition tip">
 <p>Rename API</p>
 </div>
-<pre><code>PUT /replica-name1/2.txt HTTP/1.1
+<pre><code>PUT /replica-name1/2.txt?cluster HTTP/1.1
 Host: 127.0.0.1:8080
 Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -675,7 +675,7 @@ X-Hyper-Rename-Source: /replica-name1/%EC%83%88%20%ED%8F%B4%EB%8D%94/1.txt
 <div class="admonition tip">
 <p>Change Modified Time API</p>
 </div>
-<pre><code>PUT /replica-name1/1.txt HTTP/1.1
+<pre><code>PUT /replica-name1/1.txt?cluster HTTP/1.1
 Host: 127.0.0.1:8080
 Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -693,7 +693,7 @@ X-Hyper-Set-Filetime: Sun, 02 Aug 2020 07:28:00 GMT
 <div class="admonition tip">
 <p>Delete API</p>
 </div>
-<pre><code>DELETE /replica-name1/2.txt HTTP/1.1
+<pre><code>DELETE /replica-name1/2.txt?cluster HTTP/1.1
 Host: 127.0.0.1:8080
 Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -710,7 +710,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 <div class="admonition tip">
 <p>Find API</p>
 </div>
-<pre><code>FIND /replica-name1/1.txt?pretty HTTP/1.1
+<pre><code>FIND /replica-name1/1.txt?pretty&amp;cluster HTTP/1.1
 Host: 127.0.0.1:8080
 Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
@@ -891,12 +891,12 @@ Authorization: Basic YWRtaW46YWRtaW4=
 <h2 id="push">PUSH 하기</h2>
 <h5 id="push_1">Push 요청</h5>
 <p><code>push</code>동작 시연을 위해 <code>peer</code> <strong>hostname0</strong>의 <code>/</code>에 임의의 파일을 복사합니다. <br />
-전 <strong>server001.png</strong> 파일을 복사하였습니다. 그리고 <strong>server001.png</strong>파일을 모든 <code>peer</code>에게 <code>push</code>를 하겠습니다.</p>
+필자는 <strong>server001.png</strong> 파일을 복사하였습니다. 그리고 <strong>server001.png</strong>파일을 모든 <code>peer</code>에게 <code>push</code>합니다.</p>
 <div class="admonition tip">
 <p>Sync API</p>
 </div>
-<pre><code>SYNC /replica-name1/server001.png?pretty HTTP/1.1
-Host: test
+<pre><code>SYNC /replica-name1/server001.png?pretty&amp;cluster HTTP/1.1
+Host: 127.0.0.1:8080
 Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
 </code></pre>
