@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Logging Configurations - HyperCluster</title>
+  <title>URI Query - HyperCluster</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Logging Configurations";
-    var mkdocs_page_input_path = "guides\\logging-config.md";
+    var mkdocs_page_name = "URI Query";
+    var mkdocs_page_input_path = "guides\\query.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -101,7 +101,7 @@
     
       
     
-    <li>Logging Configurations</li>
+    <li>URI Query</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -112,41 +112,24 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="logging-configurations">Logging Configurations</h1>
-<p><strong><em>로깅 환경 설정 안내서</em></strong></p>
+                <h1 id="uri-query">URI Query</h1>
+<p><strong><em>URI Query 안내서</em></strong></p>
 <hr />
-<h2 id="_1">로그 설정</h2>
-<p>두 종류의 로그를 저장 합니다.</p>
-<ul>
-<li>trace</li>
-<li>access</li>
-</ul>
-<p><code>trace</code>로그는 <strong>painc</strong>, <strong>error</strong> 등 <strong>debug</strong> 정보나 <strong>issue</strong> 처리를 위한 로그 입니다.</p>
-<p><code>access</code>로그는 <code>clustering</code> 작업 처리 결과를 저장하는 로그이며 <strong>ElasticSearch</strong>와 직접 연계가 가능하도록 <strong>JSON</strong> 형태로 저장됩니다.</p>
-<pre><code>logs:
-  trace:
-    path:
-    debug: true
-    level: 99
-    rotacnt: 30
-    rotafreq: 86400
-  access:
-    path:
-    debug: false
-    level: 0
-    rotacnt: 30
-    rotafreq: 86400
-</code></pre>
-<ul>
-<li><code>path</code> - 로그가 저장될 경로</li>
-<li><code>debug</code> - 소스 위치 출력</li>
-<li><code>level</code> - 저장할 로그의 범위 정의</li>
-<li><code>rotacnt</code> - 로그 로테이션 갯수</li>
-<li><code>rotafreq</code> - 로그 로테이션 주기(sec)</li>
-</ul>
-<div class="admonition tip">
-<p>HyperCluster의 로그는 rotation 기능이 있습니다.</p>
+<div class="admonition note">
+<p>pretty                </p>
 </div>
+<p><strong><em>Request의 결과를 가독성이 좋은 상태로 가공하여 출력합니다.</em></strong></p>
+<hr />
+<div class="admonition note">
+<p>purge</p>
+</div>
+<p><strong><em>UPLOAD 또는 SYNC(PUSH) 할려는 파일이 대상 peer에 존재 한다면 저장이 완료 되는 시점에 최신파일 여부와 상관없이 swap을 합니다.</em></strong></p>
+<hr />
+<div class="admonition note">
+<p>cluster</p>
+</div>
+<p><strong><em>Request의 결과에 Cluster정보를 포함하여 출력합니다.</em></strong></p>
+<hr />
               
             </div>
           </div>

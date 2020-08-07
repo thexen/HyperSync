@@ -159,12 +159,12 @@
 <p><strong>API 사용 구문을 정의 합니다.</strong></p>
 <h3 id="request">Request</h3>
 <p>HTTP Request Syntax를 사용하며</p>
-<pre><code>METHOD URI HTTP/1.1
+<pre><code>METHOD URI?Query HTTP/1.1
 </code></pre>
 
 <p>Request의 URI는 <code>cluster</code>섹션에 등록한 <code>named-cluster</code>가 포함하여야 합니다.</p>
 <p><code>named-cluster</code>는 대소문자를 구분하지만, <code>uri</code> 와 <code>source uri</code>는 대소문자 구분을 하지 않으며 <code>lower case</code> 처리 됩니다.</p>
-<pre><code>METHOD /{named-cluster}/{URI} HTTP/1.1
+<pre><code>METHOD /{named-cluster}/{URI}?{Query} HTTP/1.1
 </code></pre>
 
 <div class="admonition note">
