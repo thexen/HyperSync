@@ -71,6 +71,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#base-peer">Base Peer</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sync-vs-push">SYNC vs PUSH</a>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -126,10 +128,42 @@
 <strong><em>Lead Peer</em></strong>가  수행 명령을 전달 하고 수집하여 사용자에게 응답합니다.</p>
 <hr />
 <h2 id="base-peer">Base Peer</h2>
-<p>사용자가 <code>SYNC</code>명령을 전달하고 결과를 응답 받기 위해 연결한 <code>peer</code>.
-임시로 <code>SYNC</code> 명령을 처리를 위해 사용자를 대신하는 역할을 합니다.</p>
-<p>사용자가 <code>SYNC</code>명령을 <strong><em>Lead Peer</em></strong>에게 요청하면 <strong><em>Lead Peer</em></strong>는 <strong><em>Base Peer</em></strong>로 임시 전환 되며 사용자가 요청한 <code>cluster</code>에 첨여 한 <code>Peer</code>중에서 임시 <strong><em>Lead Peer</em></strong>를 선출 하여 <strong><em>Base Peer</em></strong>와 통신을 하게 됩니다.</p>
-<p><strong><em>Base Peer</em></strong>에 있는 Content를 임시 <strong><em>Lead Peer</em></strong>에게 전송하여 <code>cluster</code>에 참여한 다른 모든 <code>peer</code>에게도 전달이 가능하도록 합니다.</p>
+<p>사용자가 <code>SYNC</code> 또는 <code>PUSH</code> 명령을 전달하고 결과를 수집 집계하기 위해 연결한 <code>peer</code>. </p>
+<p>사용자가 <code>SYNC</code> 명령을 <strong><em>Lead Peer</em></strong>에게 요청하면 <strong><em>Lead Peer</em></strong>는 <strong><em>Base Peer</em></strong>로 임시 전환 되며 사용자가 요청한 <code>cluster</code>에 첨여 한 <code>Peer</code>중에서 임시 <strong><em>Lead Peer</em></strong>를 선출 하여 <strong><em>Base Peer</em></strong>와 통신을 하게 됩니다.
+<strong><em>Base Peer</em></strong>에 있는 Content를 임시 <strong><em>Lead Peer</em></strong>에게 전송하여 <code>cluster</code>에 참여한 다른 모든 <code>peer</code>에게도 전달이 가능하도록 합니다.</p>
+<hr />
+<h2 id="sync-vs-push">SYNC vs PUSH</h2>
+<table>
+<thead>
+<tr>
+<th align="center">내용</th>
+<th align="center">SYNC</th>
+<th align="center">PUSH</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">대상</td>
+<td align="center"><strong><em>cluster에 참여한 모든 peer</em></strong></td>
+<td align="center"><strong><em>cluster에 참여한 단일 peer</em></strong></td>
+</tr>
+<tr>
+<td align="center">사용 목적</td>
+<td align="center"><strong><em>전체 동기화</em></strong></td>
+<td align="center"><strong><em>부분 동기화</em></strong></td>
+</tr>
+<tr>
+<td align="center">Header 추가</td>
+<td align="center">없음</td>
+<td align="center"><strong><em>X-Hyper-Push-Destination</em></strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>FIND?recursive</code> 명령으로 동기화 상태를 분석 후 특정 peer에 파일이 누락 되었거나, 동기화가 되어 있지 않은 경우
+<strong><em>PUSH</em></strong>를 사용합니다.</li>
+</ul>
+<hr />
               
             </div>
           </div>
