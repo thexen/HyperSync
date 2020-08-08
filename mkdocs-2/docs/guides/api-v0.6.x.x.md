@@ -15,9 +15,10 @@ HTTP Request Syntax를 사용하며
 METHOD URI?Query HTTP/1.1
 ```
 
-Request의 URI는 `cluster`섹션에 등록한 `named-cluster`가 포함하여야 합니다.
-
+Request의 URI는 `cluster`섹션에 등록한 `named-cluster`가 포함하여야 합니다.    
 `named-cluster`는 대소문자를 구분하지만, `uri` 와 `source uri`는 대소문자 구분을 하지 않으며 `lower case` 처리 됩니다.
+
+[※ 사용 가능한 URI Query](query.md)
 
 ```
 METHOD /{named-cluster}/{URI}?{Query} HTTP/1.1
@@ -38,7 +39,7 @@ Authorization: Basic  {base64(user/password)}
     GET /replica-name1/1.txt HTTP/1.1    
     Authorization: Basic YWRtaW46YWRtaW4=
 
-[참고 RFC 7235, section 4.2: Authorization](https://tools.ietf.org/html/rfc7235#section-4.2)
+[※ RFC 7235, section 4.2: Authorization](https://tools.ietf.org/html/rfc7235#section-4.2)
 
 ----------------------------------------------------------------------------------------------------------------
 
@@ -105,7 +106,7 @@ Transfer-Encoding: chunked
     67890    
     0
 
-[참고 RFC 7230, section 3.3.1: Transfer-Encoding](https://tools.ietf.org/html/rfc7230#section-3.3.1)
+[※ RFC 7230, section 3.3.1: Transfer-Encoding](https://tools.ietf.org/html/rfc7230#section-3.3.1)
 
 부분 업로드 기능을 제공합니다.
 업로드 요청시 Header에 `Range`를 추가하여 요청하면 file offset을 변경하여 저장하게 됩니다.
@@ -127,7 +128,7 @@ Range: bytes={start offset- end offset}
     
     12345678901234567890    
 
-[참고 RFC 7233, section 3.1: Range](https://tools.ietf.org/html/rfc7233#section-3.1)
+[※ RFC 7233, section 3.1: Range](https://tools.ietf.org/html/rfc7233#section-3.1)
 
 ### Create Directory
 
@@ -277,7 +278,7 @@ Authorization: Basic  {base64(user/password)}
 !!! tip ""
     cluster에 참여한 peer들의 동기화 상태를 확일 할 수 있습니다.
 
-`cluster`에 참여한 모든 `peer`에서 Content의 정보를 구합니다.
+`cluster`에 참여한 모든 `peer`에서 Content의 정보를 출력합니다.
 
 ```
 FIND /{named-cluster}/{URI} HTTP/1.1
@@ -290,7 +291,7 @@ Authorization: Basic  {base64(user/password)}
     Connection: Close   
     Authorization: Basic YWRtaW46YWRtaW4=    
 
-`cluster`에 참여한 모든 `peer`에서 Directory의 정보를 구합니다.
+`cluster`에 참여한 모든 `peer`에서 Directory의 정보를 출력합니다.
 
 ```
 FIND /{named-cluster}/{URI}/ HTTP/1.1
@@ -325,6 +326,32 @@ Authorization: Basic  {base64(user/password)}
 
 ----------------------------------------------------------------------------------------------------------------
 
+### Push
+
+사용자가 접속한 `peer`의 Content를 `cluster`에 참여한 특정 `peer`로 push 합니다.
+`cluster`에 참여한 `peer`들의 동기화 상태를 비교 분석하여 동기화가 되어 있지 않는 파일을 `peer` 단위로 동기화 할 수 있습니다.
+
+|내용| SYNC | PUSH |
+|:---:|:---:|:---:|
+|대상|***cluster에 참여한 모든 peer***|***cluster에 참여한 단일 peer***|
+|사용 목적|***전체 동기화***|***부분 동기화***|
+| Header 추가 |없음|***X-Hyper-Push-Destination***|
+
+```
+PUSH /{named-cluster}/{URI} HTTP/1.1
+Authorization: Basic  {base64(user/password)}
+X-Hyper-Push-Destination: {hostname}
+```
+
+!!! note ""
+    SYNC /replica-name1/1.txt?pretty HTTP/1.1    
+    Host: 127.0.0.1:8080    
+    Connection: Close   
+    Authorization: Basic YWRtaW46YWRtaW4=  
+    X-Hyper-Push-Destination: hostname1
+
+----------------------------------------------------------------------------------------------------------------
+
 ### Download
 
 Content를 다운로드 합니다.
@@ -342,7 +369,7 @@ Authorization: Basic  {base64(user/password)}
 
 ### Get Directory
 
-Directory의 Content 목록을 가져옵니다.
+Directory의 Content 목록을 출력합니다.
 만약 Directory가 아닌 File 인경우 Content Download로 전환 됩니다.
 
 ```
@@ -359,7 +386,7 @@ Authorization: Basic  {base64(user/password)}
 
 ### Get Attribute
 
-Content의 정보를 구합니다.
+Content의 정보를 출력합니다.
 
 ```
 HEAD /{named-cluster}/{URI} HTTP/1.1
@@ -371,3 +398,5 @@ Authorization: Basic  {base64(user/password)}
     Host: 127.0.0.1:8080    
     Connection: Close   
     Authorization: Basic YWRtaW46YWRtaW4=  
+
+----------------------------------------------------------------------------------------------------------------

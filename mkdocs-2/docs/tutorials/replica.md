@@ -230,6 +230,8 @@ cluster:
 !!! tip
     `cluster.replica-name1.elasticsearch-url`은 `access log`가 저장 될 `ElasticSearch`의 URL 정보입니다.
 
+![대체 텍스트](../images/es-001.png)
+
 -------------
 
 ## peer 실행하기

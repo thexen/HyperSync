@@ -641,7 +641,8 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 ##### 검색 요청
 
-`cluster`에 참여한 모든 `peer`에서 **/1.txt**파일을 검색하고 정보를 보여 줍니다.
+`cluster`에 참여한 모든 `peer`에서 **/1.txt**파일을 검색하고 정보를 출력합니다.
+검색하고자 하는 대상이 **Directory**라면 `recursive` **query**를 사용 할 수 있습니다.
 
 !!! tip ""
     Find API
@@ -692,15 +693,17 @@ Authorization: Basic YWRtaW46YWRtaW4=
         "time": "Thu,  6 Aug 2020 15:28:57 GMT",
         "time_taken": "0s"
       },
-      "response": {
-        "attr": "file",
-        "directorycnt": 0,
-        "filecnt": 0,
-        "filesize": 20,
-        "found": true,
-        "hash": "c971acdb2e5180618d6fab0ac05255a26bd992444cec7e99db0338333d2170ea",
-        "modified": "Sun,  2 Aug 2020 07:28:00 GMT"
-      }
+      "response": [
+        {
+          "uri": "/1.txt",
+          "attr": "file",
+          "directorycnt": 0,
+          "filecnt": 1,
+          "filesize": 20,
+          "hash": "c971acdb2e5180618d6fab0ac05255a26bd992444cec7e99db0338333d2170ea",
+          "modified": "Sun,  2 Aug 2020 07:28:00 GMT"
+        }
+      ]
     },
     {
       "command": "find",
@@ -732,15 +735,17 @@ Authorization: Basic YWRtaW46YWRtaW4=
         "time": "Thu,  6 Aug 2020 15:28:57 GMT",
         "time_taken": "998.1µs"
       },
-      "response": {
-        "attr": "file",
-        "directorycnt": 0,
-        "filecnt": 0,
-        "filesize": 20,
-        "found": true,
-        "hash": "c971acdb2e5180618d6fab0ac05255a26bd992444cec7e99db0338333d2170ea",
-        "modified": "Sun,  2 Aug 2020 07:28:00 GMT"
-      }
+      "response": [
+        {
+          "uri": "/1.txt",
+          "attr": "file",
+          "directorycnt": 0,
+          "filecnt": 1,
+          "filesize": 20,
+          "hash": "c971acdb2e5180618d6fab0ac05255a26bd992444cec7e99db0338333d2170ea",
+          "modified": "Sun,  2 Aug 2020 07:28:00 GMT"
+        }
+      ]
     },
     {
       "command": "find",
@@ -772,15 +777,17 @@ Authorization: Basic YWRtaW46YWRtaW4=
         "time": "Thu,  6 Aug 2020 15:28:57 GMT",
         "time_taken": "998.1µs"
       },
-      "response": {
-        "attr": "file",
-        "directorycnt": 0,
-        "filecnt": 0,
-        "filesize": 20,
-        "found": true,
-        "hash": "c971acdb2e5180618d6fab0ac05255a26bd992444cec7e99db0338333d2170ea",
-        "modified": "Sun,  2 Aug 2020 07:28:00 GMT"
-      }
+      "response": [
+        {
+          "uri": "/1.txt",
+          "attr": "file",
+          "directorycnt": 0,
+          "filecnt": 1,
+          "filesize": 20,
+          "hash": "c971acdb2e5180618d6fab0ac05255a26bd992444cec7e99db0338333d2170ea",
+          "modified": "Sun,  2 Aug 2020 07:28:00 GMT"
+        }
+      ]
     },
     {
       "command": "find",
@@ -812,15 +819,17 @@ Authorization: Basic YWRtaW46YWRtaW4=
         "time": "Thu,  6 Aug 2020 15:28:57 GMT",
         "time_taken": "2.993ms"
       },
-      "response": {
-        "found": true,
-        "attr": "file",
-        "modified": "Sun,  2 Aug 2020 07:28:00 GMT",
-        "filesize": 1123,
-        "filecnt": 0,
-        "directorycnt": 0,
-        "hash": "c971acdb2e5180618d6fab0ac05255a26bd992444cec7e99db0338333d2170ea"
-      }
+      "response": [
+        {
+          "uri": "/1.txt",
+          "attr": "file",
+          "directorycnt": 0,
+          "filecnt": 1,
+          "filesize": 20,
+          "hash": "c971acdb2e5180618d6fab0ac05255a26bd992444cec7e99db0338333d2170ea",
+          "modified": "Sun,  2 Aug 2020 07:28:00 GMT"
+        }
+      ]
     }
   ]
 }
@@ -828,11 +837,11 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 ----
 
-## PUSH 하기
+## 모든 peer를 대상으로 PUSH 하기
 
-##### Push 요청
+##### Sync 요청
 
-`push`동작 시연을 위해 `peer` **hostname0**의 `/`에 임의의 파일을 복사합니다.   
+`sync`동작 시연을 위해 `peer` **hostname0**의 `/`에 임의의 파일을 복사합니다.   
 필자는 **server001.png** 파일을 복사하였습니다. 그리고 **server001.png**파일을 모든 `peer`에게 `push`합니다.
 
 !!! tip ""
@@ -845,7 +854,7 @@ Connection: Close
 Authorization: Basic YWRtaW46YWRtaW4=
 ```
 
-##### Push 결과
+##### Sync 결과
 
 ```
 {
@@ -985,5 +994,33 @@ Authorization: Basic YWRtaW46YWRtaW4=
   ]
 }
 ```
+
+----
+
+## 과제1
+
+!!! danger ""
+    hostname0에서 hostname1로 임의의 파일 push 하기.
+
+!!! tip "Hint"
+    PUSH METHOD    
+    X-Hyper-Push-Destination: hostname1    
+    요청 하기
+
+
+## 과제2
+
+!!! danger ""
+    동기화가 되어 있는 상태에서 hostname2의 임의의 파일을 삭제한다.    
+    그리고 동기화 상태를 확인하고 동기화가 되어 있지 않거나 누락된 파일이 존재하는 peer를 검색하여
+    해당 파일을 push 하기.
+
+!!! tip "Hint"
+    FIND METHOD    
+    recursive query    
+    로 요청하여 동기화 상태 분석    
+    PUSH METHOD    
+    X-Hyper-Push-Destination: hostname1        
+    요청 하기
 
 ----

@@ -67,7 +67,7 @@
     cluster: 
       restapi:
         role: restapi
-        elasticsearch: 
+        elasticsearch-url: 
         api:
           - status
         peers:
@@ -89,7 +89,7 @@
             grant: r
        replica-name2:
          role: advertisement
-         elasticsearch:
+         elasticsearch-url:
          peers:
          users:
 
