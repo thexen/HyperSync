@@ -2,6 +2,10 @@
 
 ----
 
+## How to build
+
+* [How to build](howtobuild.md)
+
 ## Configuration
 
 * [Clustering Configuration](clustering-config.md)
