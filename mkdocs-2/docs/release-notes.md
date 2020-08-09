@@ -26,6 +26,7 @@
     * rename
     * delete
     * copy
+    * mkdir
     * change modified file time
     * upload
     * download
