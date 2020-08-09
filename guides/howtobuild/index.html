@@ -117,11 +117,14 @@
 <hr />
 <h3 id="linux">Linux</h3>
 <div class="admonition note">
-<p>go build -tags LINUX</p>
+<p>go build -tags LINUX <br />
+OR  <br />
+chmod +x build_linux_release.sh  <br />
+./build_linux_release.sh</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">서비스 등록</p>
-<p>cd shell  <br />
+<p>cd build/linux  <br />
 hypercluster.service 파일 적당히 수정  <br />
 chmod +x install_service.sh  <br />
 ./install_service.sh</p>
@@ -129,20 +132,25 @@ chmod +x install_service.sh  <br />
 <hr />
 <h3 id="windows-release">Windows release</h3>
 <div class="admonition note">
-<p>go build -tags WINDOWS,RELEASE</p>
+<p>go build -tags WINDOWS,RELEASE  <br />
+OR  <br />
+build_win_release.bat</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">서비스 등록</p>
-<p>sc create "HyperCluster" binPath={output}</p>
+<p>sc create "HyperCluster" binPath={hypercluster.exe}   <br />
+sc description "HyperCluster" "Hyper Cluster API Server 0.6.0.0"</p>
 </div>
-<p><code>{output}</code> 빌드 결과 파일 경로입니다</p>
+<p><code>{hypercluster.exe}</code>는 build를 후 생성된 파일경로 와 파일이름으로 변경.</p>
 <div class="admonition note">
 <p class="admonition-title">서비스 삭제</p>
 <p>sc delete "HyperCluster"  </p>
 </div>
 <h3 id="windows-debug">Windows debug</h3>
 <div class="admonition note">
-<p>go build</p>
+<p>go build <br />
+OR  <br />
+build_win_debug.bat</p>
 </div>
 <hr />
               
