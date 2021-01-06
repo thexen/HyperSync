@@ -1,6 +1,6 @@
 # License
 
-***GNU General Public License 3.0***
+***정책 정리 중...***
 
 ## 제한 사용자
 
@@ -11,4 +11,5 @@
             
 
     
+## Sponsor    
 

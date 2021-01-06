@@ -14,6 +14,7 @@ nav:
   - API:
     - 'Version 0.6.X.X': 'guides/api-v0.6.x.x.md'
   - Glossary: glossary.md
+  - Explorer: explorer.md
   - Release notes: release-notes.md
   - License: license.md
   - Tutorials: tutorials/index.md
