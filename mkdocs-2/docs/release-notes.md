@@ -39,7 +39,7 @@
         * rename
         * create directory
         * peer monitoring
-        * multi-Lingual support(Korean, English)
+        * multi-language support(Korean, English)
 
 ----
 
