@@ -2,7 +2,7 @@
 !!! note ""
     HyperCluster는   
     2008년 C++ Windows 버전을 개발 하였던 실 시간 동기화 프로그램의 Concept을 
-    개선하여 소스 오픈을 목적으로 GOLANG으로 재 개발하게 되었습니다.
+    개선하여 GOLANG으로 재 개발하게 되었습니다.
     
 Event 방식의 동기화 프로그램과 달리 사용자가 동기화 명령을 요청하면
 `cluster`에 참여한 모든 `peer`들이 명령을 수행하고 `Lead Peer`가 결과를 수집,

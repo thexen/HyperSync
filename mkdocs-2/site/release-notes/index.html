@@ -124,26 +124,55 @@
 <h2 id="_1">개발 계획</h2>
 <div class="admonition note">
 <ol>
-<li>Docker Container 배포</li>
-<li>Volumes 모니터링<ul>
-<li>peer 간 Volume 내용 비교/분석 리포팅 <ul>
-<li>ElasticSearch 연동</li>
+<li>Docker Container 배포   </li>
+<li>모니터링 및 관리   </li>
+<li>DID 인증   </li>
+<li>UDP 파일 전송 및 P2P   </li>
+<li>BlockChain 연계     <ul>
+<li>IPFS 개발 ???   </li>
 </ul>
 </li>
-<li>누락되었거나 동기화가 되지 않은 파일 자동 동기화</li>
+<li>Download시 File Cache를 이용한 동기화    <br />
+    (파일이 없는 peer에 content를 요청 할 경우<br />
+    peer가 속해 있는 Cluster에 파일을 탐색하고 전송, 저장.)   </li>
+<li>Hyper-Cluster Mount    <ul>
+<li>FUSE 연동   </li>
+<li>Dokan 연동       </li>
 </ul>
 </li>
-<li>탐색기</li>
-<li>Cli</li>
-<li>시스템 모니터링 정보 수집</li>
-<li>FUSE 연동</li>
-<li>Dokan 연동</li>
 </ol>
 </div>
+<ul>
+<li>2021.08.<ul>
+<li>DID Auth</li>
+</ul>
+</li>
+</ul>
 <hr />
 <h2 id="version-0600">Version 0.6.0.0</h2>
 <ul>
-<li>2020.10.01</li>
+<li>2020.12.31<ul>
+<li>Synchronization<ul>
+<li>cat</li>
+</ul>
+</li>
+<li>Explorer<ul>
+<li>upload( real time auto sycn)</li>
+<li>download</li>
+<li>scan &amp; auto push(sync)</li>
+<li>remove</li>
+<li>rename</li>
+<li>create directory</li>
+<li>peer monitoring</li>
+<li>multi-Lingual support(Korean, English)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>2020.10.01<ul>
 <li>Clustering</li>
 <li>Synchronization<ul>
 <li>rename</li>
@@ -156,6 +185,8 @@
 <li>find</li>
 <li>sync</li>
 <li>push</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

@@ -344,11 +344,44 @@ X-Hyper-Push-Destination: {hostname}
 ```
 
 !!! note ""
-    SYNC /replica-name1/1.txt?pretty HTTP/1.1    
+    PUSH /replica-name1/1.txt?pretty HTTP/1.1    
     Host: 127.0.0.1:8080    
     Connection: Close   
     Authorization: Basic YWRtaW46YWRtaW4=  
     X-Hyper-Push-Destination: hostname1
+
+----------------------------------------------------------------------------------------------------------------
+
+### Cat
+
+`peer`에게 `cluster` 상태와 기타 정보를 요청합니다.
+
+
+지원 가능한 CAT API를 확인 할 수 있습니다.
+```
+CAT /{named-cluster}/ HTTP/1.1
+Authorization: Basic  {base64(user/password)}
+```
+
+`peer`에 `mount`되어 있는 `volum`의 상태를 구합니다.
+```
+CAT /{named-cluster}/peer/disk/ HTTP/1.1
+Authorization: Basic  {base64(user/password)}
+```
+
+`cluster`정보를 구합니다.
+`cluster`에 속해 있는 모든 `peer`와 관련 정보를 얻을수 있습니다.
+```
+CAT /{named-cluster}/info/ HTTP/1.1
+Authorization: Basic  {base64(user/password)}
+```
+
+`peer`의 OS와 Hyper-Cluster의 버전 정보를 구합니다..
+```
+CAT /{named-cluster}/peer/platform/ HTTP/1.1
+Authorization: Basic  {base64(user/password)}
+```
+
 
 ----------------------------------------------------------------------------------------------------------------
 

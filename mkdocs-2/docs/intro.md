@@ -8,14 +8,15 @@
 
 * ***HyperCluster Explorer***    
 
-* ***HyperCluster Cli***   
+---
 
-* ***HyperCluster DMount***    
+* ***HyperCluster Composer***    
 
-* ***HyperCluster FMount***   
+* ***HyperCluster Mount Driver***    
 
-* ***HyperCluster Harvester***    
+* ***HyperCluster Cache***    
 
+* ***HyperCluster IPFS***    
 
 ----
 
