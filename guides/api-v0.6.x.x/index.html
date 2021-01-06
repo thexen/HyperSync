@@ -91,6 +91,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#push">Push</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cat">Cat</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#download">Download</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#get-directory">Get Directory</a>
@@ -459,12 +461,36 @@ X-Hyper-Push-Destination: {hostname}
 </code></pre>
 
 <div class="admonition note">
-<p>SYNC /replica-name1/1.txt?pretty HTTP/1.1  <br />
+<p>PUSH /replica-name1/1.txt?pretty HTTP/1.1  <br />
 Host: 127.0.0.1:8080  <br />
 Connection: Close <br />
 Authorization: Basic YWRtaW46YWRtaW4=<br />
 X-Hyper-Push-Destination: hostname1</p>
 </div>
+<hr />
+<h3 id="cat">Cat</h3>
+<p><code>peer</code>에게 <code>cluster</code> 상태와 기타 정보를 요청합니다.</p>
+<p>지원 가능한 CAT API를 확인 할 수 있습니다.</p>
+<pre><code>CAT /{named-cluster}/ HTTP/1.1
+Authorization: Basic  {base64(user/password)}
+</code></pre>
+
+<p><code>peer</code>에 <code>mount</code>되어 있는 <code>volum</code>의 상태를 구합니다.</p>
+<pre><code>CAT /{named-cluster}/peer/disk/ HTTP/1.1
+Authorization: Basic  {base64(user/password)}
+</code></pre>
+
+<p><code>cluster</code>정보를 구합니다.
+<code>cluster</code>에 속해 있는 모든 <code>peer</code>와 관련 정보를 얻을수 있습니다.</p>
+<pre><code>CAT /{named-cluster}/info/ HTTP/1.1
+Authorization: Basic  {base64(user/password)}
+</code></pre>
+
+<p><code>peer</code>의 OS와 Hyper-Cluster의 버전 정보를 구합니다..</p>
+<pre><code>CAT /{named-cluster}/peer/platform/ HTTP/1.1
+Authorization: Basic  {base64(user/password)}
+</code></pre>
+
 <hr />
 <h3 id="download">Download</h3>
 <p>Content를 다운로드 합니다.</p>
