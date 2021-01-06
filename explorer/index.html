@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Glossary - HyperCluster</title>
+  <title>Explorer - HyperCluster</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Glossary";
-    var mkdocs_page_input_path = "glossary.md";
+    var mkdocs_page_name = "Explorer";
+    var mkdocs_page_input_path = "explorer.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -64,20 +64,28 @@
                     <li class="toctree-l1"><a class="reference internal" href="../guides/api-v0.6.x.x/">Version 0.6.X.X</a>
                     </li>
                 </ul>
-                <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Glossary</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#lead-peer">Lead Peer</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#base-peer">Base Peer</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#sync-vs-push">SYNC vs PUSH</a>
-    </li>
-    </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../glossary/">Glossary</a>
                     </li>
                 </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../explorer/">Explorer</a>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Explorer</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_1">로그인</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">동기화 결과</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">폴더 또는 파일 비교분석</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">비교분석 결과</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_5">대기열 추가 및 동기화</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_6">다시 폴더 또는 파일 비교분석</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_7">설정</a>
+    </li>
+    </ul>
                     </li>
                 </ul>
                 <ul>
@@ -113,7 +121,7 @@
     
       
     
-    <li>Glossary</li>
+    <li>Explorer</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -124,50 +132,35 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1">용어 사전</h1>
+                <h1 id="explorer">Explorer</h1>
+<p><strong><em>Version 0.6.X.X Explorer 안내서.</em></strong></p>
 <hr />
-<h2 id="lead-peer">Lead Peer</h2>
-<p>사용자가 <code>Cluster</code>를 사용하기 위해 연결한 <code>Peer</code>.</p>
-<p>사용자가 Clustering 명령 <strong><em>Lead Peer</em></strong>에게 요청하면 사용자가 요청한 <code>cluster</code>에 참여한 <code>peer</code>에게
-<strong><em>Lead Peer</em></strong>가  수행 명령을 전달 하고 수집하여 사용자에게 응답합니다.</p>
-<hr />
-<h2 id="base-peer">Base Peer</h2>
-<p>사용자가 <code>SYNC</code> 또는 <code>PUSH</code> 명령을 전달하고 결과를 수집 집계하기 위해 연결한 <code>peer</code>. </p>
-<p>사용자가 <code>SYNC</code> 명령을 <strong><em>Lead Peer</em></strong>에게 요청하면 <strong><em>Lead Peer</em></strong>는 <strong><em>Base Peer</em></strong>로 임시 전환 되며 사용자가 요청한 <code>cluster</code>에 첨여 한 <code>Peer</code>중에서 임시 <strong><em>Lead Peer</em></strong>를 선출 하여 <strong><em>Base Peer</em></strong>와 통신을 하게 됩니다.
-<strong><em>Base Peer</em></strong>에 있는 Content를 임시 <strong><em>Lead Peer</em></strong>에게 전송하여 <code>cluster</code>에 참여한 다른 모든 <code>peer</code>에게도 전달이 가능하도록 합니다.</p>
-<hr />
-<h2 id="sync-vs-push">SYNC vs PUSH</h2>
-<table>
-<thead>
-<tr>
-<th align="center">내용</th>
-<th align="center">SYNC</th>
-<th align="center">PUSH</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">대상</td>
-<td align="center"><strong><em>cluster에 참여한 모든 peer</em></strong></td>
-<td align="center"><strong><em>cluster에 참여한 단일 peer</em></strong></td>
-</tr>
-<tr>
-<td align="center">사용 목적</td>
-<td align="center"><strong><em>전체 동기화</em></strong></td>
-<td align="center"><strong><em>부분 동기화</em></strong></td>
-</tr>
-<tr>
-<td align="center">Header 추가</td>
-<td align="center">없음</td>
-<td align="center"><strong><em>X-Hyper-Push-Destination</em></strong></td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><code>FIND?recursive</code> 명령으로 동기화 상태를 분석 후 특정 peer에 파일이 누락 되었거나, 동기화가 되어 있지 않은 경우
-<strong><em>PUSH</em></strong>를 사용합니다.</li>
-</ul>
-<hr />
+<h3 id="_1">로그인</h3>
+<p><img alt="대체 텍스트" src="../images/explorer01.png" /></p>
+<h3 id="_2">동기화 결과</h3>
+<p>탐색기화면에 드래그앤 드랍으로 파일을 동기화 할 수 있습니다.
+업로드가 완료되는 즉시 <code>cluster</code>에 연결되어 있는 모든 <code>peer</code>들은 동기화가 완료 됩니다.
+<img alt="대체 텍스트" src="../images/explorer02.png" /></p>
+<h3 id="_3">폴더 또는 파일 비교분석</h3>
+<p>탐색기화면에서 폴더 또는 파일에 마우스 우클릭으로 Scan을 클릭하거나 아래 그림처럼 빨간사각형에 폴더 또는 파일명을 입력합니다. 그리고 빨간색 사각형 안의 버튼을 클릭합니다.
+그러면 <code>leader peer</code>를 기준으로 빨강색에서 입력한 값을 <code>cluster</code>에 연결되어 있는 모든 <code>peer</code>들을 대상으로 비교분석합니다.</p>
+<p><img alt="대체 텍스트" src="../images/explorer03-01.png" /></p>
+<h3 id="_4">비교분석 결과</h3>
+<p>아래 그림은 비교분석 결과이며 하나의 파일이 누락되어 있거나 <code>leader peer</code>의 파일과 다르다는 것을 알 수 있습니다.
+빨간색 사각형의 버튼을 눌러 분석결과를 자세히 확인 할 수 있습니다
+<img alt="대체 텍스트" src="../images/explorer03-02.png" /></p>
+<h3 id="_5">대기열 추가 및 동기화</h3>
+<p>분석결과를 확인 하였으니 동기화를 하도록 합니다.
+빨간색 사각형의 버튼을 클릭하여 대기열에 추가 한후 보라색 버튼을 클릭하여 동기화를 합니다
+<img alt="대체 텍스트" src="../images/explorer03-03.png" /></p>
+<h3 id="_6">다시 폴더 또는 파일 비교분석</h3>
+<p>동기화가 되었는지 결과는 결과화면으로 확인을 하면 되지만 <code>scan</code>을 이용하여 전체적인 동기화 상태를 확인하여도 됩니다.
+아래 그림처럼 빨강색 사각형의 우측 버튼을 클릭하여 리스트를 지운 후 좌측의 버튼을 클릭하여 다시 비교분석을 합니다.
+결과는 동기화가 100% 일치한 상태로 나왔습니다.
+<img alt="대체 텍스트" src="../images/explorer03-04.png" /></p>
+<h3 id="_7">설정</h3>
+<p>설정화면에서 Cluster의 상태를 확인 할 수 있습니다.
+<img alt="대체 텍스트" src="../images/explorer04.png" /></p>
               
             </div>
           </div>
@@ -175,10 +168,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../explorer/" class="btn btn-neutral float-right" title="Explorer">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../release-notes/" class="btn btn-neutral float-right" title="Release notes">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../guides/api-v0.6.x.x/" class="btn btn-neutral" title="Version 0.6.X.X"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../glossary/" class="btn btn-neutral" title="Glossary"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -204,10 +197,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../guides/api-v0.6.x.x/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../glossary/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../explorer/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../release-notes/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
